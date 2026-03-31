@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Vehicle | GarageOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#f8f9ff",
+              "primary": "#3250d3",
+              "inverse-on-surface": "#eaf1ff",
+              "secondary-fixed": "#f2daff",
+              "on-error-container": "#93000a",
+              "on-surface": "#0b1c30",
+              "surface-container-highest": "#d3e4fe",
+              "inverse-surface": "#213145",
+              "on-tertiary-container": "#ffffff",
+              "secondary-fixed-dim": "#e0b6ff",
+              "error": "#ba1a1a",
+              "surface-variant": "#d3e4fe",
+              "secondary": "#8337be",
+              "surface-dim": "#cbdbf5",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#b9c3ff",
+              "outline": "#757686",
+              "on-tertiary-fixed-variant": "#005321",
+              "on-primary-fixed-variant": "#0d35bb",
+              "tertiary": "#006d2e",
+              "on-surface-variant": "#444654",
+              "primary-fixed": "#dee1ff",
+              "on-background": "#0b1c30",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed": "#002109",
+              "background": "#f8f9ff",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#ffffff",
+              "surface-container-high": "#dce9ff",
+              "outline-variant": "#c5c5d7",
+              "primary-container": "#4f6bed",
+              "tertiary-container": "#00893c",
+              "surface-bright": "#f8f9ff",
+              "on-secondary-fixed-variant": "#6915a5",
+              "on-primary-fixed": "#001258",
+              "tertiary-fixed-dim": "#4ae176",
+              "surface-container-low": "#eff4ff",
+              "on-secondary-fixed": "#2e004e",
+              "surface-tint": "#3351d3",
+              "tertiary-fixed": "#6bff8f",
+              "secondary-container": "#c276ff",
+              "on-error": "#ffffff",
+              "surface-container": "#e5eeff",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#4c007d",
+              "inverse-primary": "#b9c3ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar from Shared Components -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-500">GarageOS</span>
+<div class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 w-64">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full ml-2" placeholder="Search vehicles..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a professional automotive technician in a clean workshop uniform looking at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCojv46z40--skjqrQYDKJ-MIkOyImdXQ2AKN-aRNpoL-rNtPGMoKP3Im117ujl_EdKgz8Te59hiSonAhi7CWstCHIyRpuZ6HgHNic51qlcuQZKN70c1Pm9oaMKXUWQhwHe577QL_narnw5X7iFSw0C1TUbPx9FJj1qaAmN-dhwmMhkzlHG6W5Uqw5-ACST0spjivQOFE_Z0nWUuRJtGpLuQNcoNE2SetsY_Vi-ZzaM1pkW8M_fsVXnMb3DkpGKGiVdjFdm1iAcKNOZ"/>
+</div>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 h-px w-full"></div>
+</nav>
+<!-- SideNavBar from Shared Components -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-slate-50 dark:bg-slate-950 border-r border-slate-200/50 dark:border-slate-800/50 flex flex-col p-4 gap-2">
+<div class="mb-6 px-2">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-blue-100 rounded-lg">
+<span class="material-symbols-outlined text-blue-600">garage</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Main Workshop</p>
+<p class="text-xs text-on-surface-variant">Active: 12 Bays</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 hover:bg-blue-50/50 transition-all rounded-lg text-sm font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm rounded-lg text-sm font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span> Workflow
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 hover:bg-blue-50/50 transition-all rounded-lg text-sm font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">calendar_month</span> Calendar
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 hover:bg-blue-50/50 transition-all rounded-lg text-sm font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">groups</span> Customers
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 hover:bg-blue-50/50 transition-all rounded-lg text-sm font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">badge</span> Team
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 hover:bg-blue-50/50 transition-all rounded-lg text-sm font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Inventory
+            </a>
+</nav>
+<button class="w-full py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-lg font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-95 duration-150">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+            Check-in Vehicle
+        </button>
+<div class="mt-auto pt-4 border-t border-slate-200/50 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 rounded-lg text-xs font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined text-sm">help</span> Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-500 rounded-lg text-xs font-semibold uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined text-sm">logout</span> Logout
+            </a>
+</div>
+</aside>
+<!-- Modal Backdrop -->
+<main class="ml-64 pt-16 min-h-screen bg-surface flex items-center justify-center p-8">
+<!-- Content background for context -->
+<div class="w-full max-w-6xl opacity-20 pointer-events-none">
+<div class="grid grid-cols-3 gap-6">
+<div class="h-32 bg-surface-container-high rounded-xl"></div>
+<div class="h-32 bg-surface-container-high rounded-xl"></div>
+<div class="h-32 bg-surface-container-high rounded-xl"></div>
+<div class="col-span-2 h-96 bg-surface-container-high rounded-xl"></div>
+<div class="h-96 bg-surface-container-high rounded-xl"></div>
+</div>
+</div>
+<!-- Add Vehicle Modal -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center bg-on-surface/20 backdrop-blur-sm p-4">
+<div class="bg-surface-container-lowest w-full max-w-[650px] rounded-xl shadow-[0px_20px_40px_rgba(11,28,48,0.06)] flex flex-col overflow-hidden">
+<!-- Modal Header -->
+<header class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/15">
+<h2 class="text-xl font-bold tracking-tight text-on-surface">Add Vehicle</h2>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Modal Body -->
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<!-- VIN Entry Section -->
+<section class="space-y-3">
+<label class="block text-sm font-semibold uppercase tracking-wider text-on-surface-variant">Vehicle Identification Number (VIN)</label>
+<div class="flex gap-3">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-highest px-4 py-3 rounded-lg border-b-2 border-primary focus:ring-0 text-on-surface font-mono tracking-widest uppercase" placeholder="Enter 17-digit VIN" type="text" value="1FM5K8GT8LGA"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-primary bg-primary-fixed px-1.5 py-0.5 rounded">12/17</span>
+</div>
+<button class="px-6 py-3 bg-primary text-white font-bold rounded-lg flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                                Decode VIN
+                            </button>
+</div>
+<!-- Decode Success Alert -->
+<div class="flex items-center gap-2 text-tertiary text-xs font-semibold py-2 px-3 bg-tertiary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                            VIN Decoded Successfully: 2020 Ford Explorer ST
+                        </div>
+</section>
+<!-- Auto-populated Grid -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Technical Specifications</h3>
+<span class="text-[10px] font-bold text-primary bg-primary-fixed px-2 py-0.5 rounded-full">AUTO-POPULATED</span>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-3 rounded-lg">
+<label class="block text-[10px] font-semibold text-outline mb-1 uppercase">Year</label>
+<p class="text-sm font-bold text-on-surface">2020</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg">
+<label class="block text-[10px] font-semibold text-outline mb-1 uppercase">Make</label>
+<p class="text-sm font-bold text-on-surface">Ford</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg">
+<label class="block text-[10px] font-semibold text-outline mb-1 uppercase">Model</label>
+<p class="text-sm font-bold text-on-surface">Explorer</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg">
+<label class="block text-[10px] font-semibold text-outline mb-1 uppercase">Trim</label>
+<p class="text-sm font-bold text-on-surface">ST 4WD</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg col-span-2">
+<label class="block text-[10px] font-semibold text-outline mb-1 uppercase">Engine</label>
+<p class="text-sm font-bold text-on-surface">3.0L V6 EcoBoost Turbo</p>
+</div>
+</div>
+</section>
+<!-- Manual Entry Grid -->
+<section class="grid grid-cols-3 gap-6">
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant">License Plate</label>
+<input class="w-full bg-surface-container-highest px-4 py-2.5 rounded border-none border-b border-outline-variant/30 focus:border-primary focus:ring-0 text-sm font-bold" placeholder="ABC-1234" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Exterior Color</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest px-4 py-2.5 rounded border-none border-b border-outline-variant/30 focus:border-primary focus:ring-0 text-sm font-bold" placeholder="Magnetic Metallic" type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#4A4A4A] border border-white/20"></div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Current Mileage</label>
+<input class="w-full bg-surface-container-highest px-4 py-2.5 rounded border-none border-b border-outline-variant/30 focus:border-primary focus:ring-0 text-sm font-bold" placeholder="42,500" type="number"/>
+</div>
+</section>
+<!-- Photo Upload -->
+<section class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Vehicle Photos</label>
+<div class="border-2 border-dashed border-outline-variant/50 rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">add_a_photo</span>
+</div>
+<div class="text-center">
+<p class="text-sm font-bold text-on-surface">Click to upload vehicle images</p>
+<p class="text-xs text-on-surface-variant mt-1">PNG, JPG or HEIC up to 10MB</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Modal Footer -->
+<footer class="p-6 bg-surface-container-low flex items-center justify-end gap-4">
+<button class="px-6 py-2.5 text-on-primary-fixed-variant font-bold text-sm hover:underline">
+                        Cancel
+                    </button>
+<button class="px-8 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-lg font-bold text-sm shadow-sm active:scale-95 transition-all">
+                        Save Vehicle
+                    </button>
+</footer>
+</div>
+</div>
+</main>
+</body></html>

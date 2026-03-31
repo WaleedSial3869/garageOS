@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Time Clock | GarageOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#00893c",
+              "secondary-fixed": "#f2daff",
+              "on-secondary": "#ffffff",
+              "surface-tint": "#3351d3",
+              "secondary-container": "#c276ff",
+              "tertiary": "#006d2e",
+              "surface-container-low": "#eff4ff",
+              "on-tertiary-fixed": "#002109",
+              "tertiary-fixed": "#6bff8f",
+              "surface-container-high": "#dce9ff",
+              "surface": "#f8f9ff",
+              "on-tertiary-container": "#ffffff",
+              "background": "#f8f9ff",
+              "surface-variant": "#d3e4fe",
+              "primary-container": "#4f6bed",
+              "error-container": "#ffdad6",
+              "surface-container-highest": "#d3e4fe",
+              "on-secondary-fixed": "#2e004e",
+              "on-surface": "#0b1c30",
+              "on-primary": "#ffffff",
+              "surface-container": "#e5eeff",
+              "tertiary-fixed-dim": "#4ae176",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#001258",
+              "inverse-on-surface": "#eaf1ff",
+              "on-secondary-container": "#4c007d",
+              "primary-fixed-dim": "#b9c3ff",
+              "primary": "#3250d3",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#0d35bb",
+              "on-background": "#0b1c30",
+              "surface-bright": "#f8f9ff",
+              "inverse-surface": "#213145",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "inverse-primary": "#b9c3ff",
+              "on-tertiary-fixed-variant": "#005321",
+              "secondary-fixed-dim": "#e0b6ff",
+              "secondary": "#8337be",
+              "on-secondary-fixed-variant": "#6915a5",
+              "surface-dim": "#cbdbf5",
+              "outline": "#757686",
+              "error": "#ba1a1a",
+              "outline-variant": "#c5c5d7",
+              "on-surface-variant": "#444654",
+              "primary-fixed": "#dee1ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .pulsing-dot {
+        box-shadow: 0 0 0 0 rgba(0, 137, 60, 0.7);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 137, 60, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 137, 60, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 137, 60, 0); }
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-700">GarageOS</span>
+<div class="hidden md:flex items-center ml-8 gap-6">
+<span class="text-slate-500 font-medium text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Dashboard</span>
+<span class="text-blue-600 font-semibold text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Work Orders</span>
+<span class="text-slate-500 font-medium text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Inventory</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary" placeholder="Search ROs or Vehicles..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">settings</span>
+<img alt="Shop Manager Profile" class="w-8 h-8 rounded-full border-2 border-primary-container object-cover" data-alt="Professional mechanic profile portrait in clean workshop uniform looking confident" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq-khAQgjBOjP-fBhwoNLC13F2gTfCJLaGtRtdVKnxOyQcSc9mK9M4HkJMMHgW0RBhj6j_LNol2dGWAfuMiwkN-bDHRDXHeQYhnas28RYddJQgXNaco0z2VeM254bPIcuLDxl1mTmYj7k4jTQXNUS5heqWgfDdYBjkjknmyGTvSnWUUKGewQteFUGqfom2rsPvyy2Pdu69LyiSPmrGpxZEmw7DOgLxBIv1WAwNJ0jfJyBUAM7Jtz_sedzL9EiAY8MQs16FCAR3Q3FC"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 border-r border-slate-100 bg-slate-50 flex flex-col py-4">
+<div class="px-4 mb-6 hidden md:block">
+<p class="text-[10px] font-semibold uppercase tracking-widest text-slate-500 px-2">Main Shop</p>
+<p class="text-xs text-blue-600 font-medium px-2">Bay 1-4 Active</p>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<div class="group flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">dashboard</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Dashboard</span>
+</div>
+<div class="group flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">directions_car</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Vehicles</span>
+</div>
+<div class="group flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">description</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Estimates</span>
+</div>
+<div class="group flex items-center gap-3 p-3 bg-blue-50 text-blue-700 border-r-4 border-blue-600 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">handyman</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Work Orders</span>
+</div>
+<div class="group flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">inventory_2</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Inventory</span>
+</div>
+<div class="group flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">analytics</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Reports</span>
+</div>
+</nav>
+<div class="mt-auto px-2 space-y-1">
+<div class="group flex items-center gap-3 p-3 text-slate-400 hover:bg-slate-100 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">help_outline</span>
+<span class="hidden md:block text-[10px] font-semibold uppercase tracking-widest">Support</span>
+</div>
+<div class="group flex items-center gap-3 p-3 text-slate-400 hover:bg-slate-100 transition-all rounded-xl cursor-pointer">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">logout</span>
+<span class="hidden md:block text-[10px] font-semibold uppercase tracking-widest">Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 md:ml-64 pt-24 px-4 md:px-8 pb-12 min-h-screen">
+<div class="max-w-7xl mx-auto">
+<!-- Bento Layout Header Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+<!-- Time Clock Display Card -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-8 flex flex-col justify-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-6">
+<div class="flex items-center gap-2 bg-tertiary-container/10 text-tertiary-container px-4 py-2 rounded-full font-bold text-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary-container pulsing-dot"></span>
+                            Clocked IN since 8:15 AM
+                        </div>
+</div>
+<div class="mb-2 text-on-surface-variant font-label text-sm uppercase tracking-widest">Current System Time</div>
+<div class="text-7xl md:text-8xl font-black tracking-tighter text-on-surface mb-8">
+                        11:42<span class="text-primary">:</span>35 <span class="text-3xl font-medium tracking-normal text-slate-400">AM</span>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="flex-1 bg-gradient-to-br from-error to-red-700 text-white py-5 px-8 rounded-lg font-bold text-xl flex items-center justify-center gap-3 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">logout</span>
+                            Clock Out
+                        </button>
+<button class="flex-1 bg-amber-400 hover:bg-amber-500 text-amber-950 py-5 px-8 rounded-lg font-bold text-xl flex items-center justify-center gap-3 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">coffee</span>
+                            Start Break
+                        </button>
+</div>
+</div>
+<!-- Summary Statistics Card -->
+<div class="lg:col-span-5 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between">
+<div>
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                            Today's Summary
+                        </h2>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-lowest p-5 rounded-lg">
+<p class="text-on-surface-variant text-xs font-semibold uppercase tracking-wider mb-1">Total On-Clock</p>
+<p class="text-3xl font-bold text-on-surface">03:27</p>
+<p class="text-[10px] text-tertiary font-medium mt-1">+12m vs yesterday</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg">
+<p class="text-on-surface-variant text-xs font-semibold uppercase tracking-wider mb-1">Break Time</p>
+<p class="text-3xl font-bold text-on-surface">00:15</p>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1">Remaining: 45m</p>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 rounded-lg p-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Shop Efficiency: 94%</p>
+<p class="text-xs text-on-surface-variant">You've completed 3/4 scheduled jobs early.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Task Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+<!-- Active Job Timer Card -->
+<div class="lg:col-span-12 bg-surface-container-highest rounded-xl p-1 shadow-sm overflow-hidden border-b-2 border-primary">
+<div class="bg-surface-container-lowest rounded-[10px] p-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-xl bg-primary-fixed-dim flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl">car_repair</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold">ACTIVE JOB</span>
+<h3 class="text-xl font-extrabold text-on-surface">RO-1003</h3>
+</div>
+<p class="text-on-surface-variant font-medium">2022 Ford F-150 Lightning • Brake Pad Replacement</p>
+</div>
+</div>
+<div class="flex flex-col items-center md:items-end">
+<div class="flex items-center gap-4 mb-2">
+<span class="text-4xl font-mono font-bold text-primary">01:14:22</span>
+<div class="w-3 h-3 rounded-full bg-tertiary pulsing-dot"></div>
+</div>
+<p class="text-xs font-semibold text-on-surface-variant uppercase tracking-widest">Est. Completion: 2:00:00</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-6 py-4 rounded-lg bg-surface-container-high text-on-surface font-bold hover:bg-surface-dim transition-colors active:scale-95">
+<span class="material-symbols-outlined">pause_circle</span>
+                                    Pause
+                                </button>
+<button class="flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-white font-bold hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">stop_circle</span>
+                                    Complete
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Job Log Table -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden">
+<div class="p-6 border-b border-surface-container">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">history</span>
+                        Today's Activity Log
+                    </h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Job ID</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Description</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Start Time</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">End Time</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Duration</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">RO-1003</td>
+<td class="px-6 py-4">
+<p class="font-semibold text-on-surface">Brake Pad Replacement</p>
+<p class="text-xs text-on-surface-variant">Ford F-150 Lightning</p>
+</td>
+<td class="px-6 py-4 text-sm">10:28 AM</td>
+<td class="px-6 py-4 text-sm">—</td>
+<td class="px-6 py-4 text-sm font-mono font-semibold text-primary">01:14:22</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-tertiary-container/10 text-tertiary-container text-[10px] font-bold rounded-full">IN PROGRESS</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">RO-0988</td>
+<td class="px-6 py-4">
+<p class="font-semibold text-on-surface">Synthetic Oil Change</p>
+<p class="text-xs text-on-surface-variant">Tesla Model 3</p>
+</td>
+<td class="px-6 py-4 text-sm">09:15 AM</td>
+<td class="px-6 py-4 text-sm">10:10 AM</td>
+<td class="px-6 py-4 text-sm font-mono font-semibold">00:55:00</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-bold rounded-full">COMPLETED</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">RO-0982</td>
+<td class="px-6 py-4">
+<p class="font-semibold text-on-surface">Multi-Point Inspection</p>
+<p class="text-xs text-on-surface-variant">BMW X5 xDrive40i</p>
+</td>
+<td class="px-6 py-4 text-sm">08:20 AM</td>
+<td class="px-6 py-4 text-sm">09:10 AM</td>
+<td class="px-6 py-4 text-sm font-mono font-semibold">00:50:00</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-bold rounded-full">COMPLETED</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Action (Contextual: Start New Job) -->
+<button class="fixed bottom-8 right-8 bg-primary text-white w-14 h-14 md:w-16 md:h-16 rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

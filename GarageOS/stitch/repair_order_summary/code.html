@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Repair Order #1002 - GarageOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+            .print-container { box-shadow: none !important; margin: 0 !important; width: 100% !important; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#f8f9ff",
+                        "on-background": "#0b1c30",
+                        "primary": "#3250d3",
+                        "primary-container": "#4f6bed",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "on-surface-variant": "#444654",
+                        "outline-variant": "#c5c5d7",
+                        "tertiary-container": "#00893c",
+                        "error-container": "#ffdad6",
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-300">GarageOS</span>
+<div class="hidden md:flex items-center gap-6 ml-8">
+<span class="text-slate-500 dark:text-slate-400 font-medium text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Dashboard</span>
+<span class="text-blue-600 dark:text-blue-400 font-semibold text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Work Orders</span>
+<span class="text-slate-500 dark:text-slate-400 font-medium text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Vehicles</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-100 rounded-full">notifications</div>
+<div class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-100 rounded-full">settings</div>
+<img alt="Shop Manager Profile" class="w-8 h-8 rounded-full object-cover border border-slate-200" data-alt="professional portrait of a shop manager in a clean automotive workshop environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBuxLYcyJhkMZwck7NJm44FDCMgF5andxNdkzORljwMYNo8-teGo4KLkm9wS53_diuSJgRGWi-sdseLBUEbMHE7oDU5kofVobBZGsnrELC4p_nI-o_b0eQpUx7KE1r5oK2CdkJHbK_NCmk6zXZ6ul-S9dDlXmn90zSl_TCQmqdwlczfUlzyGVyUgVfxeweNP95A2yKs_Q7OK-LBbAQ4S6DGPlozjoQf398KZNxwERM6qyxf2Hr9riKCMLinllMiBiJCd6tz6LIApWg"/>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col py-4 no-print">
+<div class="flex flex-col gap-1 px-3">
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Vehicles</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined">description</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Estimates</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-r-4 border-blue-600 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined">handyman</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Work Orders</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Inventory</span>
+</div>
+</div>
+<div class="mt-auto px-3 flex flex-col gap-1">
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 rounded-lg cursor-pointer transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 md:ml-64 pt-24 pb-12 px-4 md:px-8">
+<!-- Action Header (No Print) -->
+<div class="max-w-4xl mx-auto flex justify-between items-center mb-6 no-print">
+<div>
+<nav class="flex items-center gap-2 text-sm text-on-surface-variant mb-2">
+<span>Work Orders</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="font-semibold text-primary">Order #1002</span>
+</nav>
+<h1 class="text-2xl font-bold tracking-tight">Repair Order Summary</h1>
+</div>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary/20" onclick="window.print()">
+<span class="material-symbols-outlined">print</span>
+                Print Summary
+            </button>
+</div>
+<!-- Print-Ready Repair Order Document -->
+<div class="print-container max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-sm border border-outline-variant/15 relative overflow-hidden">
+<!-- Blueprint Tonal Accent (Subtle Visual Interest) -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-surface-container-low -mr-16 -mt-16 rotate-45 pointer-events-none opacity-50"></div>
+<!-- Header Block -->
+<div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-12 relative">
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 bg-primary flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined text-white text-3xl" data-weight="fill">settings_suggest</span>
+</div>
+<div>
+<h2 class="text-xl font-extrabold tracking-tighter text-on-surface">GarageOS Auto Repair</h2>
+<div class="text-sm text-on-surface-variant leading-relaxed mt-1">
+                            123 Mechanics Way, Bay Area<br/>
+                            San Francisco, CA 94103<br/>
+                            Phone: (555) 123-4567<br/>
+                            Email: service@garageos.com
+                        </div>
+</div>
+</div>
+<div class="text-right">
+<h1 class="text-3xl font-black text-primary tracking-tighter mb-1">REPAIR ORDER</h1>
+<div class="flex flex-col gap-1">
+<div class="text-lg font-bold">Order #1002</div>
+<div class="text-sm text-on-surface-variant">Date: October 24, 2023</div>
+<div class="text-sm text-on-surface-variant">Service Writer: Marcus Chen</div>
+</div>
+</div>
+</div>
+<!-- Customer & Vehicle Block -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant/20 mb-12">
+<!-- Customer Column -->
+<div class="bg-white pr-8 pb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-3">Customer Information</h3>
+<div class="space-y-1">
+<div class="font-bold text-on-surface">Jonathan Miller</div>
+<div class="text-sm text-on-surface-variant">4582 Oakwood Avenue</div>
+<div class="text-sm text-on-surface-variant">Palo Alto, CA 94301</div>
+<div class="text-sm text-on-surface-variant">j.miller@example.com</div>
+<div class="text-sm text-on-surface-variant">(555) 987-6543</div>
+</div>
+</div>
+<!-- Vehicle Column -->
+<div class="bg-white pl-8 pb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-3">Vehicle Information</h3>
+<div class="grid grid-cols-2 gap-y-2 text-sm">
+<div>
+<span class="text-xs text-on-surface-variant font-medium block">Year/Make/Model</span>
+<span class="font-bold">2021 Toyota RAV4 Hybrid</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant font-medium block">Color</span>
+<span class="font-bold">Midnight Blue</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant font-medium block">VIN</span>
+<span class="font-mono text-xs font-bold">JT3F1RFV0LD02341</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant font-medium block">License Plate</span>
+<span class="font-bold">7XYZ922</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant font-medium block">Mileage In</span>
+<span class="font-bold">34,512</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant font-medium block">Mileage Out</span>
+<span class="font-bold">34,518</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Services Table -->
+<div class="mb-12">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary">Services &amp; Items</h3>
+<div class="h-px flex-1 bg-outline-variant/15 ml-4"></div>
+</div>
+<!-- Service Group 1: Oil Change -->
+<div class="mb-8 group">
+<div class="bg-surface-container-low px-4 py-2 flex items-center justify-between mb-2">
+<span class="font-bold text-sm tracking-tight">SERVICE: Full Synthetic Oil Change &amp; Filter</span>
+<span class="text-xs font-semibold text-primary">Ref: S-101</span>
+</div>
+<div class="px-4">
+<table class="w-full text-sm">
+<thead>
+<tr class="text-on-surface-variant border-b border-outline-variant/10 text-left">
+<th class="py-2 font-medium">Description</th>
+<th class="py-2 font-medium text-right w-20">Qty/Hrs</th>
+<th class="py-2 font-medium text-right w-24">Rate</th>
+<th class="py-2 font-medium text-right w-24">Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-outline-variant/5">
+<td class="py-3">Labor: Drain oil, replace filter, safety inspection</td>
+<td class="py-3 text-right">0.8</td>
+<td class="py-3 text-right">$80.00</td>
+<td class="py-3 text-right font-medium">$64.00</td>
+</tr>
+<tr class="border-b border-outline-variant/5">
+<td class="py-3">Part: 0W-20 Synthetic Motor Oil (5qt)</td>
+<td class="py-3 text-right">1</td>
+<td class="py-3 text-right">$45.00</td>
+<td class="py-3 text-right font-medium">$45.00</td>
+</tr>
+<tr class="border-b border-outline-variant/5">
+<td class="py-3">Part: Genuine Toyota Oil Filter</td>
+<td class="py-3 text-right">1</td>
+<td class="py-3 text-right">$12.00</td>
+<td class="py-3 text-right font-medium">$12.00</td>
+</tr>
+<tr>
+<td class="py-3 text-right text-xs font-bold uppercase tracking-wider text-on-surface-variant" colspan="3">Service Subtotal</td>
+<td class="py-3 text-right font-bold text-on-surface">$121.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Service Group 2: Tire Rotation -->
+<div class="mb-8">
+<div class="bg-surface-container-low px-4 py-2 flex items-center justify-between mb-2">
+<span class="font-bold text-sm tracking-tight">SERVICE: Tire Rotation &amp; Pressure Check</span>
+<span class="text-xs font-semibold text-primary">Ref: S-102</span>
+</div>
+<div class="px-4">
+<table class="w-full text-sm">
+<tbody>
+<tr class="border-b border-outline-variant/5">
+<td class="py-3">Labor: 4-Wheel Rotation &amp; Nitrogen Fill</td>
+<td class="py-3 text-right w-20">Comp</td>
+<td class="py-3 text-right w-24">$0.00</td>
+<td class="py-3 text-right w-24 font-medium">$0.00</td>
+</tr>
+<tr class="border-b border-outline-variant/5">
+<td class="py-3">Part: Valve Stem Caps (Chrome Finish)</td>
+<td class="py-3 text-right">4</td>
+<td class="py-3 text-right">$3.75</td>
+<td class="py-3 text-right font-medium">$15.00</td>
+</tr>
+<tr>
+<td class="py-3 text-right text-xs font-bold uppercase tracking-wider text-on-surface-variant" colspan="3">Service Subtotal</td>
+<td class="py-3 text-right font-bold text-on-surface">$15.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Totals Section -->
+<div class="flex flex-col items-end gap-2 mb-12">
+<div class="w-full md:w-64 space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Parts Subtotal</span>
+<span class="font-medium">$72.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Labor Subtotal</span>
+<span class="font-medium">$64.00</span>
+</div>
+<div class="flex justify-between text-sm border-t border-outline-variant/15 pt-2">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="font-medium">$136.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Tax (13%)</span>
+<span class="font-medium">$17.68</span>
+</div>
+<div class="flex justify-between text-sm text-primary">
+<span>Discount</span>
+<span class="font-medium">-$5.88</span>
+</div>
+<div class="flex justify-between text-xl font-black text-on-surface border-t-2 border-primary pt-3 mt-4">
+<span>GRAND TOTAL</span>
+<span class="text-primary">$147.80</span>
+</div>
+</div>
+</div>
+<!-- Authorization Area -->
+<div class="mt-16 pt-8 border-t border-dashed border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div>
+<div class="mb-2 text-xs font-bold uppercase tracking-widest text-on-surface">Customer Authorization</div>
+<div class="border-b-2 border-on-background/10 h-12 mb-2"></div>
+<div class="flex justify-between text-[10px] font-semibold text-on-surface-variant uppercase tracking-tighter">
+<span>Signature of Authorization</span>
+<span>Date</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Legal Disclaimer</h4>
+<p class="text-[9px] text-on-surface-variant leading-relaxed opacity-80">
+                            I hereby authorize the repair work herein set forth to be done along with the necessary material and agree that you are not responsible for loss or damage to vehicle or articles left in vehicle in case of fire, theft or any other cause beyond your control. I hereby grant permission to you and your employees to operate vehicle for the purpose of testing and/or inspection. An express mechanic's lien is hereby acknowledged on above vehicle to secure the amount of repairs thereto. Storage charges will accrue after 48 hours of completion notice.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<div class="mt-12 text-center text-[10px] text-on-surface-variant font-medium tracking-tight opacity-50">
+                Generated by GarageOS Management System • Transaction ID: TXN-990281-LLP • Page 1 of 1
+            </div>
+</div>
+</main>
+<!-- Contextual FAB (Shared Logic: Hidden on Detail Pages normally, but here acting as "Send to Phone") -->
+<div class="fixed bottom-8 right-8 no-print group">
+<button class="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined" data-weight="fill">send_to_mobile</span>
+</button>
+<span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-on-background text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Send to Customer</span>
+</div>
+</body></html>

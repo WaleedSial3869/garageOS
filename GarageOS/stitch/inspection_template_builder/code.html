@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inspection Templates - GarageOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-container": "#00893c",
+                        "secondary-fixed": "#f2daff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#3351d3",
+                        "secondary-container": "#c276ff",
+                        "tertiary": "#006d2e",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed": "#002109",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-container-high": "#dce9ff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary-container": "#4f6bed",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-fixed": "#2e004e",
+                        "on-surface": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001258",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary-container": "#4c007d",
+                        "primary-fixed-dim": "#b9c3ff",
+                        "primary": "#3250d3",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#0d35bb",
+                        "on-background": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b9c3ff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "secondary-fixed-dim": "#e0b6ff",
+                        "secondary": "#8337be",
+                        "on-secondary-fixed-variant": "#6915a5",
+                        "surface-dim": "#cbdbf5",
+                        "outline": "#757686",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c5c5d7",
+                        "on-surface-variant": "#444654",
+                        "on-primary-fixed": "#001258",
+                        "primary-fixed": "#dee1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d3e4fe;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 glass-header border-b border-slate-100/50 flex justify-between items-center h-16 px-6 shadow-sm">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-blue-700">GarageOS</span>
+<div class="hidden md:flex items-center gap-6">
+<nav class="flex gap-4 text-sm font-medium tracking-tight">
+<a class="text-slate-500 hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg" href="#">Dashboard</a>
+<a class="text-blue-600 font-semibold px-3 py-2 rounded-lg" href="#">Vehicles</a>
+<a class="text-slate-500 hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg" href="#">Work Orders</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search templates..." type="text"/>
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined text-sm">add</span>
+                + Create Template
+            </button>
+<div class="flex items-center gap-2 ml-2 pl-4 border-l border-slate-200">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-50 rounded-full">notifications</span>
+<img alt="Shop Manager Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-white shadow-sm" data-alt="Professional shop manager portrait in a clean modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFzv75bgpE2MwDDKW4B6v5ghnfhgIedrROff9qsscNBQtN0Iv9s7fSG2kbdzcK2Qofr7-uGJJ4ahUcnj1CrldUlUAHeYq7wrz3yEFUPF-XbUe0FUqmB5csNr2v1nQNvTs2Z2QP231d99I8f1hmvt0sHG7oxduYcKQuCGUvS1Klb9MeNFp1TRkLv3e4Wc5DzjqBS-9XyH08hsbvUGqxDRxw2kaETsHcP5lKGa0U_hhgVYJkj74DO-WzeznTLP1bRw89fJZibeNcVyBE"/>
+</div>
+</div>
+</header>
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 bg-slate-50 border-r border-slate-100 flex flex-col py-4 z-40">
+<div class="px-4 mb-6 hidden md:block">
+<h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">Main Shop</h2>
+<p class="text-[10px] text-blue-600 font-medium">Bay 1-4 Active</p>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">dashboard</span>
+<span class="hidden md:block text-sm font-medium">Dashboard</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl bg-blue-50 text-blue-700 border-r-4 border-blue-600 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">description</span>
+<span class="hidden md:block text-sm font-semibold">Inspection Templates</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">directions_car</span>
+<span class="hidden md:block text-sm font-medium">Vehicles</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">handyman</span>
+<span class="hidden md:block text-sm font-medium">Work Orders</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">inventory_2</span>
+<span class="hidden md:block text-sm font-medium">Inventory</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">analytics</span>
+<span class="hidden md:block text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="px-2 mt-auto border-t border-slate-200 pt-4">
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">help_outline</span>
+<span class="hidden md:block text-sm font-medium">Support</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">logout</span>
+<span class="hidden md:block text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 md:ml-64 pt-24 pb-12 px-8 min-h-screen">
+<!-- Page Title -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold tracking-tight text-on-surface">Inspection Templates</h1>
+<p class="text-on-surface-variant mt-1">Configure and manage vehicle health check forms.</p>
+</div>
+<!-- Bento Grid for Existing Templates -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+<!-- Template Card: Multi-Point -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-transparent hover:border-primary/20 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 rounded-lg text-primary">
+<span class="material-symbols-outlined">fact_check</span>
+</div>
+<span class="px-2.5 py-1 bg-tertiary-container/10 text-tertiary-container text-[10px] font-bold uppercase rounded-full">Default</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Multi-Point Inspection</h3>
+<div class="flex gap-4 mt-4 text-xs font-medium text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">view_quilt</span> 12 sections</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">list_alt</span> 48 items</span>
+</div>
+</div>
+<!-- Template Card: Pre-Purchase -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-transparent hover:border-primary/20 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-slate-50 rounded-lg text-slate-400">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Pre-Purchase Inspection</h3>
+<div class="flex gap-4 mt-4 text-xs font-medium text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">view_quilt</span> 8 sections</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">list_alt</span> 32 items</span>
+</div>
+</div>
+<!-- Template Card: Brake Inspection -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-transparent hover:border-primary/20 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-slate-50 rounded-lg text-slate-400">
+<span class="material-symbols-outlined">emergency</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Brake Inspection</h3>
+<div class="flex gap-4 mt-4 text-xs font-medium text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">view_quilt</span> 4 sections</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">list_alt</span> 16 items</span>
+</div>
+</div>
+</div>
+<!-- Template Builder Interface -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden border border-outline-variant/10">
+<!-- Builder Header -->
+<div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-white">
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<input class="text-xl font-bold border-none p-0 focus:ring-0 text-on-surface w-64" type="text" value="New Service Template"/>
+<span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Editor Mode</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-sm font-semibold text-slate-500 hover:text-on-surface px-4 py-2 transition-all">Discard</button>
+<button class="bg-primary text-white px-6 py-2 rounded-lg text-sm font-semibold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">Save Template</button>
+</div>
+</div>
+<div class="flex h-[600px]">
+<!-- Left Panel: Sections -->
+<div class="w-1/3 md:w-1/4 border-r border-slate-100 bg-slate-50/50 flex flex-col">
+<div class="p-4 border-b border-slate-100 flex justify-between items-center bg-white">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500">Sections</span>
+<button class="p-1 text-primary hover:bg-blue-50 rounded transition-all">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+<div class="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm border-l-4 border-primary group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm">drag_indicator</span>
+<span class="text-sm font-semibold text-primary">Front Area</span>
+</div>
+<span class="text-[10px] bg-blue-100 text-blue-700 font-bold px-1.5 py-0.5 rounded">6 items</span>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-white rounded-lg transition-all group cursor-pointer text-slate-500">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-300 text-sm">drag_indicator</span>
+<span class="text-sm font-medium">Driver Side</span>
+</div>
+<span class="text-[10px] bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded">4 items</span>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-white rounded-lg transition-all group cursor-pointer text-slate-500">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-300 text-sm">drag_indicator</span>
+<span class="text-sm font-medium">Passenger Side</span>
+</div>
+<span class="text-[10px] bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded">4 items</span>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-white rounded-lg transition-all group cursor-pointer text-slate-500">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-300 text-sm">drag_indicator</span>
+<span class="text-sm font-medium">Rear Area</span>
+</div>
+<span class="text-[10px] bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded">5 items</span>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-white rounded-lg transition-all group cursor-pointer text-slate-500">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-300 text-sm">drag_indicator</span>
+<span class="text-sm font-medium">Under Carriage</span>
+</div>
+<span class="text-[10px] bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded">12 items</span>
+</div>
+</div>
+</div>
+<!-- Right Panel: Items -->
+<div class="flex-1 bg-white p-6 overflow-y-auto custom-scrollbar">
+<div class="flex justify-between items-center mb-6">
+<h4 class="text-lg font-bold text-on-surface">Items in "Front Area"</h4>
+<button class="text-xs font-semibold text-primary flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Add New Item
+                        </button>
+</div>
+<div class="space-y-4">
+<!-- Builder Item 1 -->
+<div class="p-4 rounded-xl border border-slate-100 bg-white hover:shadow-sm transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col gap-1">
+<input class="font-bold text-on-surface p-0 border-none focus:ring-0" type="text" value="Tire Tread Depth"/>
+<span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Diagnostic Item</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1.5 text-slate-400 hover:text-error hover:bg-error-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2">Condition Selectors</label>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-tertiary-container text-white">Pass</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">Attention</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">Fail</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">N/A</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+<span class="text-xs font-medium text-slate-600">Photo Required</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+<span class="text-xs font-medium text-slate-600">Force Notes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Builder Item 2 -->
+<div class="p-4 rounded-xl border border-slate-100 bg-white hover:shadow-sm transition-all group opacity-80">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col gap-1">
+<input class="font-bold text-on-surface p-0 border-none focus:ring-0" type="text" value="Brake Pad Thickness"/>
+<span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Diagnostic Item</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1.5 text-slate-400 hover:text-error hover:bg-error-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2">Condition Selectors</label>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-tertiary-container text-white">Pass</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">Attention</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">Fail</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+<span class="text-xs font-medium text-slate-600">Photo Required</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Automation Tip Card -->
+<div class="mt-8 bg-secondary-fixed text-on-secondary-fixed p-4 rounded-xl flex items-center gap-4">
+<div class="p-2 bg-secondary/20 rounded-lg">
+<span class="material-symbols-outlined text-secondary">auto_awesome</span>
+</div>
+<div>
+<p class="text-sm font-semibold">Pro Tip: Logic Automation</p>
+<p class="text-xs opacity-80">You can trigger automated SMS reminders when a "Fail" condition is selected for safety-critical items.</p>
+</div>
+<button class="ml-auto text-xs font-bold uppercase tracking-widest hover:underline transition-all">Learn More</button>
+</div>
+</main>
+<!-- Floating Mobile Add Button -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-all z-50">
+<span class="material-symbols-outlined">add</span>
+</button>
+</body></html>

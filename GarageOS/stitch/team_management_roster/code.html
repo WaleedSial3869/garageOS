@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Management - GarageOS</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#00893c",
+              "secondary-fixed": "#f2daff",
+              "on-secondary": "#ffffff",
+              "surface-tint": "#3351d3",
+              "secondary-container": "#c276ff",
+              "tertiary": "#006d2e",
+              "surface-container-low": "#eff4ff",
+              "on-tertiary-fixed": "#002109",
+              "tertiary-fixed": "#6bff8f",
+              "surface-container-high": "#dce9ff",
+              "surface": "#f8f9ff",
+              "on-tertiary-container": "#ffffff",
+              "background": "#f8f9ff",
+              "surface-variant": "#d3e4fe",
+              "primary-container": "#4f6bed",
+              "error-container": "#ffdad6",
+              "surface-container-highest": "#d3e4fe",
+              "on-secondary-fixed": "#2e004e",
+              "on-surface": "#0b1c30",
+              "on-primary": "#ffffff",
+              "surface-container": "#e5eeff",
+              "tertiary-fixed-dim": "#4ae176",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#001258",
+              "inverse-on-surface": "#eaf1ff",
+              "on-secondary-container": "#4c007d",
+              "primary-fixed-dim": "#b9c3ff",
+              "primary": "#3250d3",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#0d35bb",
+              "on-background": "#0b1c30",
+              "surface-bright": "#f8f9ff",
+              "inverse-surface": "#213145",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "inverse-primary": "#b9c3ff",
+              "on-tertiary-fixed-variant": "#005321",
+              "secondary-fixed-dim": "#e0b6ff",
+              "secondary": "#8337be",
+              "on-secondary-fixed-variant": "#6915a5",
+              "surface-dim": "#cbdbf5",
+              "outline": "#757686",
+              "error": "#ba1a1a",
+              "outline-variant": "#c5c5d7",
+              "on-surface-variant": "#444654",
+              "primary-fixed": "#dee1ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-slate-100 flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-700">GarageOS</span>
+<div class="hidden md:flex items-center ml-8 bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/15">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 placeholder:text-on-surface-variant/60 w-64" placeholder="Search team..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-blue-600" data-icon="notifications">notifications</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-blue-600" data-icon="settings">settings</span>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="Shop Manager Profile" data-alt="Professional headshot of a middle-aged male shop manager in a clean polo shirt, office background with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWYsBbMR8MdgUzxlcXeg5j0GzzilTeGWJwiARtiIJhpMQ1eFMG-yc5PhlPmJO9Y9Inl-hAxP0NhyHGTEAy9HjZO8jfaSrJ9k1vK1mMAbpK1wF_9QZVzyckFEI4V0UhRpdYWWfkZnO8pDxuRryQEyJJE9K5BVTlNeoi0-uNk713cRrdGPmFqgHvC6uvuK-OYNP8kMMe8oWi1Kw7Oi5YEP7DRRtzrwime54u1L0I3m5kajnaWUOAmihOPDPfYrfi6wZRFbJOOMdTxAgr"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 bg-slate-50 border-r border-slate-100 flex flex-col py-4 z-40">
+<div class="px-4 mb-6 hidden md:block">
+<h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500">Main Shop</h2>
+<p class="text-[10px] text-blue-600 font-bold uppercase tracking-tighter mt-1">Bay 1-4 Active</p>
+</div>
+<div class="flex-1 space-y-1 px-2">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="dashboard">dashboard</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Dashboard</span>
+</a>
+<!-- Vehicles -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="directions_car">directions_car</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Vehicles</span>
+</a>
+<!-- Team (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-700 border-r-4 border-blue-600 transition-all group" href="#">
+<span class="material-symbols-outlined filled-icon group-hover:translate-x-1 duration-300" data-icon="group">group</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Team</span>
+</a>
+<!-- Work Orders -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="handyman">handyman</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Work Orders</span>
+</a>
+<!-- Inventory -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="inventory_2">inventory_2</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Inventory</span>
+</a>
+<!-- Reports -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="analytics">analytics</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Reports</span>
+</a>
+</div>
+<div class="px-2 space-y-1 border-t border-slate-100 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="help_outline">help_outline</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="logout">logout</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="pt-24 pl-24 md:pl-72 pr-8 pb-12 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h1 class="text-2xl font-bold tracking-tight text-on-surface font-headline mb-1">Team Management</h1>
+<p class="text-on-surface-variant text-sm">Monitor shop floor capacity and performance</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-outline-variant/15">
+<button class="px-3 py-1.5 rounded-md bg-white shadow-sm text-primary font-medium text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="grid_view">grid_view</span>
+                        Grid
+                    </button>
+<button class="px-3 py-1.5 rounded-md text-on-surface-variant font-medium text-sm flex items-center gap-2 hover:bg-white/50 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="list">list</span>
+                        List
+                    </button>
+</div>
+<select class="bg-surface-container-low border-none rounded-lg text-sm font-medium focus:ring-primary h-10 px-4">
+<option>All Roles</option>
+<option>Technician</option>
+<option>Service Writer</option>
+<option>Admin</option>
+</select>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="person_add">person_add</span>
+                    + Add Team Member
+                </button>
+</div>
+</div>
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Team Size</p>
+<h3 class="text-3xl font-extrabold tracking-tighter text-on-surface">5</h3>
+</div>
+<div class="h-12 w-12 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Clocked In</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-extrabold tracking-tighter text-on-surface">4</h3>
+<span class="text-sm font-bold text-tertiary-container">80% active</span>
+</div>
+</div>
+<div class="h-12 w-12 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="timer">timer</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Shop Efficiency</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-extrabold tracking-tighter text-on-surface">87%</h3>
+<span class="text-sm font-bold text-secondary">+4% from last week</span>
+</div>
+</div>
+<div class="h-12 w-12 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+</div>
+</div>
+</div>
+<!-- Team Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Member Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 hover:shadow-lg transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Alex Rivera Avatar" class="h-14 w-14 rounded-full object-cover border-2 border-surface" data-alt="Portrait of a friendly hispanic technician wearing a dark navy work shirt, industrial workshop background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCII5bOLnPlzkoMdju37XXVwUEY_oehyP6TOa0WrW2BlLGI7qIDG34CA6SYN0qVqc1iHSx4gCEFNrTtcYZxITytAy-4NSz7PbaINGiNZU6ZSULf7kmR0AqeNc6b4u-PAn0f-fNaCs6BjKeqpK4rLvWZ0MfSQb3f07JCQ0xqcINpMvQ7W-sXu7mwoM1iLxCDruobejty-wb1qu2IabU4kUppaVGl_7ah7peT4QzsDBihyLGjPbL-Rl8HdJ8mO9SbnpDV8rwfCZ0j4nAA"/>
+<span class="absolute bottom-0 right-0 h-4 w-4 bg-tertiary-container border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface tracking-tight">Alex Rivera</h4>
+<span class="text-[10px] font-bold uppercase tracking-widest bg-primary-fixed text-primary px-2 py-0.5 rounded-full">Lead Technician</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 mb-4 grid grid-cols-2 gap-2">
+<div class="text-center border-r border-outline-variant/20">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Today's Hours</p>
+<p class="font-bold text-on-surface">6.5 / 8</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Jobs Completed</p>
+<p class="font-bold text-on-surface">4</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="h-2 w-2 bg-tertiary-container rounded-full"></span>
+<span class="text-xs font-semibold text-on-surface-variant">Clocked In</span>
+</div>
+<a class="text-xs font-bold text-on-primary-fixed-variant hover:underline flex items-center gap-1" href="#">
+                        View Profile
+                        <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Member Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 hover:shadow-lg transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Sarah Chen Avatar" class="h-14 w-14 rounded-full object-cover border-2 border-surface" data-alt="Professional woman in a business casual shirt, clean minimal office background, smiling at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYnMPiRwVVgMNddwdiDPhzvhbX1hajbm-yf4y0y3gKDrGQKVFA89XWXnKwRzY45K_S-jXuwFEcuFtYkQDDOk5GRuW-093Wch2GFnsp33MTKiDsM5yeqJNfNxQIbSrDHUP4aPON7xeaxLsJi0ZHStW6YUu_VG_pYhVIU_eKQyoRL3kFXH-fTqLRAHMWwT0D-5vU9pjxfkKV9KKuKXvfi3IQqMM4LszrE3SSuqPz9foWOVwdUZknDt2hFc6ofiwqjB8lZZAhOK7uz6qX"/>
+<span class="absolute bottom-0 right-0 h-4 w-4 bg-tertiary-container border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface tracking-tight">Sarah Chen</h4>
+<span class="text-[10px] font-bold uppercase tracking-widest bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full">Service Writer</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 mb-4 grid grid-cols-2 gap-2">
+<div class="text-center border-r border-outline-variant/20">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Today's Hours</p>
+<p class="font-bold text-on-surface">7.0 / 8</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Estimates Sent</p>
+<p class="font-bold text-on-surface">12</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="h-2 w-2 bg-tertiary-container rounded-full"></span>
+<span class="text-xs font-semibold text-on-surface-variant">Clocked In</span>
+</div>
+<a class="text-xs font-bold text-on-primary-fixed-variant hover:underline flex items-center gap-1" href="#">
+                        View Profile
+                        <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Member Card 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 hover:shadow-lg transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Marcus Johnson Avatar" class="h-14 w-14 rounded-full object-cover border-2 border-surface" data-alt="Young african american male technician with short hair, confident expression, shop setting background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmOOtK54rM7xRj8bCyK0UDSDbpAzuObJICR4WYgpmX-gUmqnvbTbRfDy8IzxOGWgF6uDxBEhApMigrGyX28t-MrmnitNbRK5PeC4CxjfoI2RNZvzjgwP8wAonZtq9cTyokNdVQQxPXHTRTv_vz0alC8pS1Qe1_bL7KiUxP6tmAzh_uD7OFfNoVSi2UbuPB8aPNZcYZW1whN5jAawU4ySUiXrAUnvkqLqOWdOwaUHNJTpa9-vBnIexugFnG4r7ZWeEpabrUZ0iI9Doh"/>
+<span class="absolute bottom-0 right-0 h-4 w-4 bg-tertiary-container border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface tracking-tight">Marcus Johnson</h4>
+<span class="text-[10px] font-bold uppercase tracking-widest bg-primary-fixed text-primary px-2 py-0.5 rounded-full">Junior Tech</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 mb-4 grid grid-cols-2 gap-2">
+<div class="text-center border-r border-outline-variant/20">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Today's Hours</p>
+<p class="font-bold text-on-surface">5.2 / 8</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Jobs Completed</p>
+<p class="font-bold text-on-surface">2</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="h-2 w-2 bg-tertiary-container rounded-full"></span>
+<span class="text-xs font-semibold text-on-surface-variant">Clocked In</span>
+</div>
+<a class="text-xs font-bold text-on-primary-fixed-variant hover:underline flex items-center gap-1" href="#">
+                        View Profile
+                        <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Member Card 4 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 hover:shadow-lg transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Elena Rodriguez Avatar" class="h-14 w-14 rounded-full object-cover border-2 border-surface" data-alt="Mid-30s woman with professional attire, soft neutral studio lighting, friendly approachable expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPge3F7eY9E9pAfWHYf2Pb0kOtPyoN0DGy0an0I2Lny0e-Hvrq6v6Af2qUjfr20H0n0GbXVCz8b0_JTtHDsZsZkP2dUyhkyII2dANE90tXJHvnRSpVUme40Zss30x3WUT_UGCtqNrJ1A7ukdxogw11DSv5YwCBSzHMI6wOntrcKCSMzf2_Ncwbvbq-ImrjNdzqujzH3LOgOs8zNCiiEPQtumXgYwNu1Au3j8k-aSCEEyfZf2Mxuxv3LKxTdPtGHdEGjzue0zuOvqqs"/>
+<span class="absolute bottom-0 right-0 h-4 w-4 bg-error border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface tracking-tight">Elena Rodriguez</h4>
+<span class="text-[10px] font-bold uppercase tracking-widest bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full">Admin</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 mb-4 grid grid-cols-2 gap-2">
+<div class="text-center border-r border-outline-variant/20">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Today's Hours</p>
+<p class="font-bold text-on-surface">0 / 8</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Payroll Actions</p>
+<p class="font-bold text-on-surface">--</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="h-2 w-2 bg-error rounded-full"></span>
+<span class="text-xs font-semibold text-on-surface-variant">Clocked Out</span>
+</div>
+<a class="text-xs font-bold text-on-primary-fixed-variant hover:underline flex items-center gap-1" href="#">
+                        View Profile
+                        <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Member Card 5 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 hover:shadow-lg transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="David Miller Avatar" class="h-14 w-14 rounded-full object-cover border-2 border-surface" data-alt="Senior male technician with salt and pepper beard, wearing work coveralls, blurred automotive bay background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsKQLoZ1t9XLnYSZxp0uwVk3rcAwoBtA1s5RHJ86pr1aIaKr-9OIPGTZwU4umUXnkDzJGyT19ked2tCaGEGdC08VvewSzSF4_xIGO1H2UQsvrLrjoAMX9cTJ2eNn0YaeybRau0KTeepOhXLhNPlNymJRuBZq3ubN7QBaHlvNT28XdIew0vEsrVUxvHs28PKWmA09pKkh6Q-G-8sUyhu202xNi6WCM05IR-rKGBdPmeBQ3LPKM6yPAEHPZLBSYXAqOXNZYLZG941NnX"/>
+<span class="absolute bottom-0 right-0 h-4 w-4 bg-tertiary-container border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface tracking-tight">David Miller</h4>
+<span class="text-[10px] font-bold uppercase tracking-widest bg-primary-fixed text-primary px-2 py-0.5 rounded-full">Technician</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 mb-4 grid grid-cols-2 gap-2">
+<div class="text-center border-r border-outline-variant/20">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Today's Hours</p>
+<p class="font-bold text-on-surface">4.5 / 8</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">Jobs Completed</p>
+<p class="font-bold text-on-surface">3</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="h-2 w-2 bg-tertiary-container rounded-full"></span>
+<span class="text-xs font-semibold text-on-surface-variant">Clocked In</span>
+</div>
+<a class="text-xs font-bold text-on-primary-fixed-variant hover:underline flex items-center gap-1" href="#">
+                        View Profile
+                        <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</main>
+</body></html>

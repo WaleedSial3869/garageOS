@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GarageOS - Digital Vehicle Inspection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-container": "#00893c",
+                        "secondary-fixed": "#f2daff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#3351d3",
+                        "secondary-container": "#c276ff",
+                        "tertiary": "#006d2e",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed": "#002109",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-container-high": "#dce9ff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary-container": "#4f6bed",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-fixed": "#2e004e",
+                        "on-surface": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001258",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary-container": "#4c007d",
+                        "primary-fixed-dim": "#b9c3ff",
+                        "primary": "#3250d3",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#0d35bb",
+                        "on-background": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b9c3ff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "secondary-fixed-dim": "#e0b6ff",
+                        "secondary": "#8337be",
+                        "on-secondary-fixed-variant": "#6915a5",
+                        "surface-dim": "#cbdbf5",
+                        "outline": "#757686",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c5c5d7",
+                        "on-surface-variant": "#444654",
+                        "on-primary-container": "#ffffff",
+                        "primary-fixed": "#dee1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar Implementation from JSON -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-300">GarageOS</span>
+<div class="h-6 w-px bg-outline-variant/30 mx-2"></div>
+<div class="flex flex-col">
+<h1 class="font-sans text-sm font-bold tracking-tight text-on-surface">Inspection — RO-1002</h1>
+<p class="text-[10px] text-on-surface-variant font-semibold uppercase tracking-wider">2021 Ford F-150 Lariat</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-4">
+<div class="text-right">
+<div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Overall Progress</div>
+<div class="w-48 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 16.6%"></div>
+</div>
+</div>
+<span class="text-xs font-bold text-primary">8 of 48</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">notifications</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim border-2 border-white overflow-hidden">
+<img alt="Shop Manager Profile" data-alt="professional shop manager headshot with neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFF57L6N1_mVKumfQweP35VmlpW0T5l7GW798YQBGqoceGs3Dhax5yG-vIJqJJ7p-KKwZYf0sRbgT4VdDm78iW-c9ZiKnJ6-k0wrEN777iCKbaBdbjtlGpxScD6ZsRQrv-PpkINttCXlqMm-bR3_toB2oGR-08BuJntK7C6Oz0WFh6A3qW6uxHG38BIuYqv8pgE83_nXlUNdqd64EALM8vV14BX7G2b_OBGDtvmZoUkH4n-FZy6OPUPHQ4BDretvQMvZa386GA1wXk"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar Implementation from JSON -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col py-4 z-40">
+<div class="flex-1 space-y-2 px-3">
+<div class="flex items-center gap-3 px-3 py-4 mb-4 bg-surface-container-low rounded-xl md:mx-0">
+<div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined">garage</span>
+</div>
+<div class="hidden md:block overflow-hidden">
+<p class="text-xs font-bold text-on-surface truncate">Main Shop</p>
+<p class="text-[10px] text-tertiary-container font-medium">Bay 1-4 Active</p>
+</div>
+</div>
+<!-- Nav Items -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-500 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">dashboard</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-r-4 border-blue-600 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">directions_car</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Vehicles</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-500 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">description</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Estimates</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-500 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">handyman</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Work Orders</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-500 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">inventory_2</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Inventory</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-500 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">analytics</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Reports</span>
+</a>
+</div>
+<div class="px-3 pt-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-500 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">help_outline</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Support</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-500 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">logout</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pl-20 md:pl-64 pt-16 min-h-screen bg-surface">
+<!-- Section Tabs (Sticky under Navbar) -->
+<nav class="sticky top-16 z-30 bg-white/60 backdrop-blur-md px-6 py-4 flex items-center gap-2 overflow-x-auto hide-scrollbar">
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-bold uppercase tracking-widest whitespace-nowrap">Front</button>
+<button class="px-5 py-2.5 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest whitespace-nowrap shadow-md ring-4 ring-primary/10">Driver Side</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-bold uppercase tracking-widest whitespace-nowrap">Rear</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-bold uppercase tracking-widest whitespace-nowrap">Passenger Side</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-bold uppercase tracking-widest whitespace-nowrap">Interior</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-bold uppercase tracking-widest whitespace-nowrap">Underhood</button>
+</nav>
+<div class="max-w-5xl mx-auto p-6 space-y-8">
+<!-- Active Section Info -->
+<div class="flex items-center justify-between mb-2">
+<div>
+<h2 class="text-2xl font-bold tracking-tight text-on-surface">Driver Side Inspection</h2>
+<p class="text-on-surface-variant font-medium">Verify exterior panel integrity and glass condition.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-tertiary-container/10 text-tertiary-container text-[10px] font-bold rounded-full uppercase">3 Completed</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded-full uppercase">5 Remaining</span>
+</div>
+</div>
+<!-- Bento Grid for Inspection Items -->
+<div class="grid grid-cols-1 gap-6">
+<!-- Inspection Card: Door Panel Condition -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm ring-1 ring-on-surface/5 flex flex-col lg:flex-row gap-8">
+<div class="flex-1 space-y-6">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="text-lg font-bold text-on-surface">Door Panel Condition</h3>
+<p class="text-sm text-on-surface-variant">Check for dents, deep scratches, or paint chips.</p>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Large Condition Buttons -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-transparent bg-surface-container-low hover:bg-tertiary-container/10 hover:text-tertiary-container transition-all group">
+<span class="material-symbols-outlined text-3xl mb-1 text-tertiary-container group-hover:scale-110 transition-transform">task_alt</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Good</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-transparent bg-surface-container-low hover:bg-blue-600/10 hover:text-blue-600 transition-all group">
+<span class="material-symbols-outlined text-3xl mb-1 text-blue-600 group-hover:scale-110 transition-transform">info</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Fair</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-primary bg-primary/5 text-primary transition-all group">
+<span class="material-symbols-outlined text-3xl mb-1 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Attention</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-transparent bg-surface-container-low hover:bg-error/10 hover:text-error transition-all group">
+<span class="material-symbols-outlined text-3xl mb-1 text-error group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">dangerous</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-center">Immediate</span>
+</button>
+</div>
+<!-- Notes Area -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">notes</span> Technician Notes
+                            </label>
+<textarea class="w-full bg-surface-container-highest border-0 border-b-2 border-outline-variant/30 rounded-t-lg focus:ring-0 focus:border-primary transition-all text-sm" placeholder="Describe the damage or recommended service..." rows="3"></textarea>
+</div>
+</div>
+<!-- Media Section -->
+<div class="w-full lg:w-72 space-y-4">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Photos &amp; Video</label>
+<!-- Thumbnail Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="relative group rounded-lg overflow-hidden h-32 bg-surface-container-low ring-1 ring-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="close up high angle of a silver car door with a noticeable small dent reflecting afternoon light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt-1IwkZSUWV9o6ttwICRQApkbTjJbwIhNE6qFQfJQpu3PD6uUrEf4ErZgBZlNfSo0gzHLU12rfH7NgT7KaGA7BgX5WHSxKqbrHm-vA6WntlYFAOCvmQdGKz4ySbGHNPUXraHbFyBUoEu-LYo1V1mpx7UrWxRa8dqhiDq3pqy2GKKYJPjpR4qo55liQ-nPn0HS2oC0WgL6t5qkulnWpRkvMRa-s1M92aFsdmIvMvauQO6iTADGvmAlVgk2PnPRHW9_T1mVnDNA0xFn"/>
+<div class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">
+<span class="material-symbols-outlined text-white">zoom_in</span>
+</div>
+<button class="absolute top-1 right-1 w-6 h-6 bg-error/90 text-white rounded-full flex items-center justify-center scale-0 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<button class="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-outline-variant bg-surface-container-low hover:bg-surface-container transition-colors group h-32">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">photo_camera</span>
+<span class="text-[10px] font-bold text-on-surface-variant">Capture</span>
+</button>
+</div>
+<button class="w-full py-3 flex items-center justify-center gap-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-sm">upload</span>
+<span class="text-xs font-bold uppercase tracking-widest">Upload Media</span>
+</button>
+</div>
+</div>
+<!-- Secondary Card: Mirror/Glass Check (Slightly simplified) -->
+<div class="bg-surface-container-low/50 rounded-xl p-6 ring-1 ring-on-surface/5 flex flex-col lg:flex-row gap-8 opacity-80">
+<div class="flex-1 space-y-6">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="text-lg font-bold text-on-surface">Mirrors &amp; Window Glass</h3>
+<p class="text-sm text-on-surface-variant">Inspect for chips, cracks, and operation.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-transparent bg-white/80">
+<span class="material-symbols-outlined text-3xl mb-1 text-on-surface-variant/40">task_alt</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Good</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-transparent bg-white/80">
+<span class="material-symbols-outlined text-3xl mb-1 text-on-surface-variant/40">info</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Fair</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-transparent bg-white/80">
+<span class="material-symbols-outlined text-3xl mb-1 text-on-surface-variant/40">warning</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-center">Attention</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-transparent bg-white/80">
+<span class="material-symbols-outlined text-3xl mb-1 text-on-surface-variant/40">dangerous</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Immediate</span>
+</button>
+</div>
+</div>
+<div class="w-full lg:w-72 hidden lg:flex items-center justify-center bg-white/30 rounded-lg border-2 border-dashed border-outline-variant/30">
+<div class="text-center">
+<span class="material-symbols-outlined text-on-surface-variant/40 text-4xl mb-2">add_a_photo</span>
+<p class="text-[10px] font-bold text-on-surface-variant/40 uppercase tracking-widest">Add Evidence</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Action -->
+<div class="pt-8 pb-12 flex justify-between items-center">
+<button class="flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-sm text-on-surface-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">arrow_back</span> Previous Section
+                </button>
+<div class="flex items-center gap-4">
+<button class="px-6 py-3 rounded-lg font-bold text-sm text-on-surface-variant border border-outline-variant hover:bg-surface-container transition-all">Save Draft</button>
+<button class="flex items-center gap-2 px-8 py-3 rounded-lg font-bold text-sm text-white bg-gradient-to-br from-primary to-primary-container shadow-lg hover:shadow-primary/20 active:scale-95 transition-all">
+                        Next Section <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Suppressed based on logic but available as task-focused "Help" if needed) -->
+<!-- Suppression logic applied: Focused task page, but adding subtle 'Review' helper -->
+<button class="fixed bottom-6 right-6 w-14 h-14 bg-secondary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined">fact_check</span>
+</button>
+</body></html>

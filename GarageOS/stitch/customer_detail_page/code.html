@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Detail: Jameson Carter | GarageOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#f8f9ff",
+              "secondary-fixed-dim": "#e0b6ff",
+              "on-tertiary-fixed-variant": "#005321",
+              "on-error-container": "#93000a",
+              "on-background": "#0b1c30",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#0d35bb",
+              "background": "#f8f9ff",
+              "tertiary": "#006d2e",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed": "#2e004e",
+              "error": "#ba1a1a",
+              "tertiary-container": "#00893c",
+              "primary-container": "#4f6bed",
+              "outline": "#757686",
+              "on-tertiary-container": "#ffffff",
+              "on-secondary-container": "#4c007d",
+              "tertiary-fixed": "#6bff8f",
+              "on-primary-container": "#ffffff",
+              "surface-variant": "#d3e4fe",
+              "on-surface-variant": "#444654",
+              "primary-fixed": "#dee1ff",
+              "on-primary-fixed": "#001258",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-surface": "#0b1c30",
+              "outline-variant": "#c5c5d7",
+              "inverse-on-surface": "#eaf1ff",
+              "on-tertiary-fixed": "#002109",
+              "on-error": "#ffffff",
+              "inverse-primary": "#b9c3ff",
+              "surface-container-highest": "#d3e4fe",
+              "primary-fixed-dim": "#b9c3ff",
+              "primary": "#3250d3",
+              "surface-bright": "#f8f9ff",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#eff4ff",
+              "secondary-container": "#c276ff",
+              "secondary": "#8337be",
+              "tertiary-fixed-dim": "#4ae176",
+              "secondary-fixed": "#f2daff",
+              "surface-tint": "#3351d3",
+              "surface-container": "#e5eeff",
+              "surface-container-high": "#dce9ff",
+              "on-secondary-fixed-variant": "#6915a5",
+              "surface-dim": "#cbdbf5",
+              "inverse-surface": "#213145"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased font-body">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-300">GarageOS</span>
+<div class="h-6 w-px bg-outline-variant/30 mx-2"></div>
+<div class="hidden md:flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 placeholder:text-on-surface-variant/60" placeholder="Search customer, VIN, or order..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-slate-50 rounded-full transition-colors text-slate-500">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-50 rounded-full transition-colors text-slate-500">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="ml-2 w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-xs font-bold ring-2 ring-white shadow-sm">
+                SM
+            </div>
+</div>
+</header>
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col py-4 z-40 overflow-y-auto">
+<div class="px-6 mb-6">
+<div class="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm border border-slate-100">
+<div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+</div>
+<div class="hidden md:block">
+<h3 class="text-xs font-bold text-on-surface leading-tight">Main Shop</h3>
+<p class="text-[10px] text-tertiary font-semibold uppercase tracking-wider">Bay 1-4 Active</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-blue-50 text-blue-700 border-r-4 border-blue-600 group" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Customers</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Vehicles</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Estimates</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Work Orders</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Reports</span>
+</a>
+</nav>
+<div class="px-4 mt-auto space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Support</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 md:ml-64 pt-16 min-h-screen bg-surface transition-all duration-300">
+<div class="max-w-7xl mx-auto p-6 md:p-8">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs font-medium text-on-surface-variant mb-6">
+<a class="hover:text-primary transition-colors" href="#">Customers</a>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-semibold">Jameson Carter</span>
+</nav>
+<!-- Customer Header Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm mb-8 ring-1 ring-outline-variant/10">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex items-start md:items-center gap-6">
+<!-- Avatar -->
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white text-3xl font-bold shadow-lg shadow-primary/20">
+                            JC
+                        </div>
+<!-- Info -->
+<div class="space-y-1">
+<h1 class="text-3xl font-extrabold tracking-tight text-on-surface">Jameson Carter</h1>
+<div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-sm text-on-surface-variant">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-lg" data-icon="mail">mail</span>jameson.carter@gmail.com</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-lg" data-icon="call">call</span>(555) 123-4567</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>1284 Oakwood Dr, Seattle, WA 98101</span>
+</div>
+<!-- Tags -->
+<div class="flex items-center gap-2 pt-2">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold uppercase tracking-widest rounded-full">VIP</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed text-[10px] font-bold uppercase tracking-widest rounded-full">Fleet</span>
+<button class="px-3 py-1 border border-dashed border-outline-variant text-outline hover:text-primary hover:border-primary text-[10px] font-bold uppercase tracking-widest rounded-full transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="add">add</span>Add
+                                </button>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-2">
+<button class="bg-primary hover:bg-primary-container text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined text-lg" data-icon="chat_bubble">chat_bubble</span> Message
+                        </button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all active:scale-95">
+<span class="material-symbols-outlined text-lg" data-icon="mail">mail</span> Email
+                        </button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all active:scale-95">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span> Edit
+                        </button>
+<button class="p-2.5 rounded-lg hover:bg-surface-container text-outline transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="flex items-center border-b border-outline-variant/30 mb-8 overflow-x-auto scrollbar-hide">
+<a class="px-6 py-4 text-sm font-bold border-b-2 border-primary text-primary transition-all whitespace-nowrap" href="#">Overview</a>
+<a class="px-6 py-4 text-sm font-semibold text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" href="#">Vehicles</a>
+<a class="px-6 py-4 text-sm font-semibold text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" href="#">Orders</a>
+<a class="px-6 py-4 text-sm font-semibold text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" href="#">Invoices</a>
+<a class="px-6 py-4 text-sm font-semibold text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" href="#">Payments</a>
+<a class="px-6 py-4 text-sm font-semibold text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" href="#">Messages</a>
+<a class="px-6 py-4 text-sm font-semibold text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" href="#">Notes</a>
+</div>
+<!-- Main Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column (65%) -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Vehicles Section -->
+<section>
+<div class="flex items-center justify-between mb-4 px-1">
+<h2 class="text-lg font-bold text-on-surface">Vehicles</h2>
+<button class="text-sm font-semibold text-primary hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Vehicle Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-sm hover:shadow-md transition-shadow group ring-1 ring-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2.5 bg-surface-container-low rounded-xl text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="directions_car">directions_car</span>
+</div>
+<span class="px-2 py-0.5 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full">ACTIVE</span>
+</div>
+<h3 class="font-bold text-on-surface mb-1">2021 Ford F-150 Lariat</h3>
+<p class="text-xs text-on-surface-variant mb-4">VIN: 1FTEW1E52MFB0****</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 text-xs">
+<span class="text-on-surface-variant">Last Service: Oct 12, 2023</span>
+<span class="font-bold text-primary">Details →</span>
+</div>
+</div>
+<!-- Vehicle Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-sm hover:shadow-md transition-shadow group ring-1 ring-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2.5 bg-surface-container-low rounded-xl text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="directions_car">directions_car</span>
+</div>
+<span class="px-2 py-0.5 bg-surface-variant text-on-surface-variant text-[10px] font-bold rounded-full">STORED</span>
+</div>
+<h3 class="font-bold text-on-surface mb-1">2019 Honda CR-V EX-L</h3>
+<p class="text-xs text-on-surface-variant mb-4">VIN: 5J6RW1H5XKA00****</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 text-xs">
+<span class="text-on-surface-variant">Last Service: Mar 05, 2023</span>
+<span class="font-bold text-primary">Details →</span>
+</div>
+</div>
+<!-- Add Vehicle Card -->
+<button class="border-2 border-dashed border-outline-variant hover:border-primary hover:bg-blue-50/50 transition-all rounded-2xl p-5 flex flex-col items-center justify-center gap-2 group min-h-[160px]">
+<span class="material-symbols-outlined text-3xl text-outline-variant group-hover:text-primary" data-icon="add_circle">add_circle</span>
+<span class="text-sm font-bold text-on-surface-variant group-hover:text-primary">Add Vehicle</span>
+</button>
+</div>
+</section>
+<!-- Recent Orders Section -->
+<section>
+<div class="flex items-center justify-between mb-4 px-1">
+<h2 class="text-lg font-bold text-on-surface">Recent Orders</h2>
+<button class="text-sm font-semibold text-primary hover:underline">New Order</button>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm ring-1 ring-outline-variant/10">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low/50">
+<tr class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+<th class="px-6 py-4">Order #</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Services</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-bold text-primary">#WO-8291</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-6 py-4 text-sm text-on-surface">Oil Change, Tire Rotation</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full">COMPLETED</span>
+</td>
+<td class="px-6 py-4 text-sm font-bold text-right">$145.82</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-bold text-primary">#WO-8104</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Sep 28, 2023</td>
+<td class="px-6 py-4 text-sm text-on-surface">Brake Pad Replacement</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full">COMPLETED</span>
+</td>
+<td class="px-6 py-4 text-sm font-bold text-right">$482.11</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-bold text-primary">#WO-7832</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Jul 15, 2023</td>
+<td class="px-6 py-4 text-sm text-on-surface">Inspection, Battery Test</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full">COMPLETED</span>
+</td>
+<td class="px-6 py-4 text-sm font-bold text-right">$89.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column (35%) -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Customer Stats Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm ring-1 ring-outline-variant/10">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="bar_chart">bar_chart</span> Customer Stats
+                        </h3>
+<div class="grid grid-cols-2 gap-y-6">
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/60 uppercase tracking-tighter mb-1">Total Visits</p>
+<p class="text-xl font-extrabold text-on-surface">12</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/60 uppercase tracking-tighter mb-1">Total Spent</p>
+<p class="text-xl font-extrabold text-primary">$3,248.50</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/60 uppercase tracking-tighter mb-1">Average Ticket</p>
+<p class="text-lg font-bold text-on-surface">$270.70</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/60 uppercase tracking-tighter mb-1">Last Visit</p>
+<p class="text-lg font-bold text-on-surface">Oct 12</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/60 uppercase tracking-tighter mb-1">Member Since</p>
+<p class="text-sm font-semibold text-on-surface">Feb 2022</p>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/60 uppercase tracking-tighter mb-1">Outstanding</p>
+<p class="text-sm font-bold text-error">$0.00</p>
+</div>
+</div>
+</div>
+<!-- Upcoming Card -->
+<div class="bg-surface-container-low rounded-2xl p-6 shadow-sm border border-primary-container/20">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-5 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="event_upcoming">event_upcoming</span> Upcoming
+                        </h3>
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-white flex flex-col items-center justify-center shrink-0 shadow-sm border border-slate-100">
+<span class="text-[8px] font-bold text-error uppercase">Nov</span>
+<span class="text-sm font-extrabold text-on-surface">18</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-on-surface leading-tight">Next Appointment</h4>
+<p class="text-xs text-on-surface-variant">Winterization Service (09:00 AM)</p>
+</div>
+</div>
+<div class="p-4 bg-white/50 rounded-xl border border-white">
+<h4 class="text-xs font-bold text-on-surface-variant flex items-center gap-1.5 mb-1">
+<span class="material-symbols-outlined text-sm text-tertiary" data-icon="info">info</span> Recommended
+                                </h4>
+<p class="text-xs text-on-surface font-semibold">Rear Brake Fluid Flush</p>
+<p class="text-[10px] text-on-surface-variant">Suggested within 500 miles</p>
+</div>
+</div>
+</div>
+<!-- Notes Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm ring-1 ring-outline-variant/10">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="sticky_note_2">sticky_note_2</span> Notes
+                        </h3>
+<div class="space-y-4 max-h-[300px] overflow-y-auto mb-6 pr-1 custom-scrollbar">
+<div class="space-y-1">
+<p class="text-xs text-on-surface leading-relaxed">Client prefers texting over calls. Remind him about the loyalty program next visit.</p>
+<p class="text-[9px] font-bold text-outline uppercase tracking-wider">Oct 12, 2023 • Admin</p>
+</div>
+<div class="h-px bg-outline-variant/10"></div>
+<div class="space-y-1">
+<p class="text-xs text-on-surface leading-relaxed">Ford F-150 has a minor dent on tailgate mentioned by customer during intake.</p>
+<p class="text-[9px] font-bold text-outline uppercase tracking-wider">Sep 28, 2023 • Tech: Marcus</p>
+</div>
+</div>
+<div class="relative">
+<input class="w-full text-xs bg-surface-container-low border-none rounded-xl py-3 pl-4 pr-10 focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/50" placeholder="Type a note..." type="text"/>
+<button class="absolute right-2 top-1.5 p-1.5 text-primary hover:bg-white rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Navigation Shadow/Separation Overlay for Mobile -->
+<div class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-white shadow-[0_-1px_10px_rgba(0,0,0,0.05)] border-t border-slate-100 flex items-center justify-around z-50">
+<button class="flex flex-col items-center justify-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[9px] font-bold uppercase">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[9px] font-bold uppercase">Clients</span>
+</button>
+<div class="w-12 h-12 bg-primary rounded-full -mt-10 flex items-center justify-center text-white shadow-lg shadow-primary/40 border-4 border-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</div>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-[9px] font-bold uppercase">Parts</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[9px] font-bold uppercase">Settings</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#00893c",
+              "secondary-fixed": "#f2daff",
+              "on-secondary": "#ffffff",
+              "surface-tint": "#3351d3",
+              "secondary-container": "#c276ff",
+              "tertiary": "#006d2e",
+              "surface-container-low": "#eff4ff",
+              "on-tertiary-fixed": "#002109",
+              "tertiary-fixed": "#6bff8f",
+              "surface-container-high": "#dce9ff",
+              "surface": "#f8f9ff",
+              "on-tertiary-container": "#ffffff",
+              "background": "#f8f9ff",
+              "surface-variant": "#d3e4fe",
+              "primary-container": "#4f6bed",
+              "error-container": "#ffdad6",
+              "surface-container-highest": "#d3e4fe",
+              "on-secondary-fixed": "#2e004e",
+              "on-surface": "#0b1c30",
+              "on-primary": "#ffffff",
+              "surface-container": "#e5eeff",
+              "tertiary-fixed-dim": "#4ae176",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#001258",
+              "inverse-on-surface": "#eaf1ff",
+              "on-secondary-container": "#4c007d",
+              "primary-fixed-dim": "#b9c3ff",
+              "primary": "#3250d3",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#0d35bb",
+              "on-background": "#0b1c30",
+              "surface-bright": "#f8f9ff",
+              "inverse-surface": "#213145",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "inverse-primary": "#b9c3ff",
+              "on-tertiary-fixed-variant": "#005321",
+              "secondary-fixed-dim": "#e0b6ff",
+              "secondary": "#8337be",
+              "on-secondary-fixed-variant": "#6915a5",
+              "surface-dim": "#cbdbf5",
+              "outline": "#757686",
+              "error": "#ba1a1a",
+              "outline-variant": "#c5c5d7",
+              "on-surface-variant": "#444654",
+              "primary-fixed": "#dee1ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .primary-gradient {
+        background: linear-gradient(135deg, #3250d3 0%, #4f6bed 100%);
+      }
+      .ghost-border-bottom {
+        border-bottom: 1px solid rgba(197, 197, 215, 0.15);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm border-b border-slate-100 dark:border-slate-800 flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 primary-gradient rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">garage</span>
+</div>
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-300">GarageOS</span>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-500 hover:bg-slate-50 p-2 rounded-full cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 hover:bg-slate-50 p-2 rounded-full cursor-pointer transition-colors" data-icon="settings">settings</span>
+</div>
+</nav>
+<main class="pt-20 pb-32 px-4 max-w-2xl mx-auto space-y-6">
+<!-- Header Section: Identity & Context -->
+<header class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<h1 class="text-2xl font-bold tracking-tight text-on-surface">Main Shop</h1>
+<p class="text-sm font-semibold text-primary uppercase tracking-widest mt-1">Vehicle Inspection Report</p>
+</div>
+<div class="bg-surface-container-low px-3 py-1 rounded-full text-xs font-bold text-on-surface-variant">
+                    OCT 24, 2023
+                </div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/15">
+<div class="space-y-1">
+<p class="text-[10px] font-bold uppercase text-outline tracking-wider">VEHICLE</p>
+<p class="text-sm font-bold text-on-surface">2019 Porsche 911 Carrera</p>
+<p class="text-xs text-on-surface-variant">VIN: ...WPOAA2A9</p>
+</div>
+<div class="space-y-1 text-right">
+<p class="text-[10px] font-bold uppercase text-outline tracking-wider">TECHNICIAN</p>
+<div class="flex items-center justify-end gap-2">
+<span class="text-sm font-bold text-on-surface">Marcus Thorne</span>
+<div class="w-6 h-6 rounded-full overflow-hidden border border-outline-variant/50">
+<img class="w-full h-full object-cover" data-alt="portrait of a professional automotive technician in a clean uniform with soft workshop lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqV2y5Y_ii2KBMOjfn0ZFzNCl8o_nMcVD2oytkuOZhf9clY6fb3Oqm1ehn5zBrdxx7kOr9p7sf57hmpvanlDQgSyMF_unuetItw8i-sxdiN7Kr1D45PNQvmYmNnta6PUAeTo3P3mzfmXe3KPLWeEr-mly4yJ3XN8ebENVlk3Kk9HjIrlTT-koDBStjhg0XdEWDx5nF2VOELQJP4CJ6pCqom27Asn_3d2Sw7tSM27NKqy3zhBAbJOYxaA-3ml0f_7t1TVQJYEx0Ahnd"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Summary Dashboard: The Health Gauge -->
+<section class="grid grid-cols-3 gap-3">
+<div class="bg-surface-container-lowest p-4 rounded-xl text-center shadow-sm border-b-4 border-tertiary">
+<span class="block text-2xl font-extrabold text-tertiary">18</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-outline">Good</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl text-center shadow-sm border-b-4 border-secondary">
+<span class="block text-2xl font-extrabold text-secondary">4</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-outline">Monitor</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl text-center shadow-sm border-b-4 border-error">
+<span class="block text-2xl font-extrabold text-error">2</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-outline">Attention</span>
+</div>
+</section>
+<!-- Inspection Category: Red (Needs Attention) -->
+<section class="space-y-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<h2 class="text-sm font-bold uppercase tracking-widest text-on-surface">Needs Attention</h2>
+</div>
+<!-- Item 1: Front Brake Pads -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-error-container">
+<div class="p-5 space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold text-on-surface">Front Brake Pads</h3>
+<span class="bg-error-container text-on-error-container text-[10px] font-bold uppercase px-3 py-1 rounded-full">Critical</span>
+</div>
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="close-up of worn automotive brake pads with visible wear and thin friction material" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbWXPFjKJAPDDh4i0Fxz64Hy0lvU0xei59VJU_m8dC8WybQWv-RJuoNPNcQmoOT_PiuiAqTCzYPmVmZSoLZX7tiFtVhlbi2t7auqzTli_KIbc3odMDU8JhSZ2bucHF3KfqjgG3qJzN-C7MY-37iYsSFj9uaNEpd6evzXy3fETOgdQOBUIcQAwk9a0eeR024IX-qaOO1825NjLVBP0gCOeefxxhmRcc8JUfbKnxXCpE-04oZq-MAwnpTluZ1_Tnx6nnH58RimA7d9o1"/>
+</div>
+<div class="space-y-2">
+<p class="text-sm text-on-surface-variant leading-relaxed">Pads are at 2mm thickness. Recommendation is replacement at or below 3mm for safety and rotor preservation.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="payments">payments</span>
+                                Est. $385.00
+                            </div>
+</div>
+</div>
+<button class="w-full primary-gradient text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        Approve Repair
+                    </button>
+</div>
+</div>
+<!-- Item 2: Tire Tread -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-error-container">
+<div class="p-5 space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="text-lg font-bold text-on-surface">Rear Left Tire</h3>
+<span class="bg-error-container text-on-error-container text-[10px] font-bold uppercase px-3 py-1 rounded-full">Safety Risk</span>
+</div>
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="close-up of car tire tread with a nail embedded in the rubber causing a slow leak" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhqUX_dbieiGvtoAEM7aW06E3ufuGJBWVY8J7j8LX1KJUmg0jSvhZT0witAKtyeMUjzOTBehep_AAriiRCdkHKqdGNSOiZJJHyIPESYC4uKYKCOe_EEVVXjuLl0YP_7zoUq_ohWIkfo6QLmAo2qbjKvmMY1OypFXmAjxjhWMzBXX6Hh-fGp_aYrm80OeD0eaEsr5sHiHjxuW8OdOiuhDvqHSwQhpt8kZdmqNuatqqBWd7Iu7QD71N7SJl6d41QWan6wz93ErRHUA6q"/>
+</div>
+<div class="space-y-2">
+<p class="text-sm text-on-surface-variant leading-relaxed">Found a puncture in the outer sidewall area. Not repairable per safety standards. Replacement required.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="payments">payments</span>
+                                Est. $420.00
+                            </div>
+</div>
+</div>
+<button class="w-full primary-gradient text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        Approve Repair
+                    </button>
+</div>
+</div>
+</section>
+<!-- Inspection Category: Yellow (Monitor) -->
+<section class="space-y-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<h2 class="text-sm font-bold uppercase tracking-widest text-on-surface">Monitor Soon</h2>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm border border-secondary-container/20">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="font-bold text-on-surface">Engine Air Filter</h3>
+<p class="text-xs text-on-surface-variant mt-1">Starting to show dirt accumulation. Recommend change next visit.</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container" data-icon="info">info</span>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-sm font-bold text-primary">$65.00</span>
+<button class="text-xs font-bold text-primary-fixed-variant bg-surface-container-low px-4 py-2 rounded-lg hover:bg-surface-container transition-colors">Add to Service</button>
+</div>
+</div>
+</section>
+<!-- Collapsed Section: Green (Passed) -->
+<section class="bg-surface-container-low rounded-xl overflow-hidden">
+<button class="w-full px-5 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-sm font-bold text-on-surface">Passed Inspections (18)</span>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="expand_more">expand_more</span>
+</button>
+</section>
+</main>
+<!-- Sticky Footer CTA -->
+<footer class="fixed bottom-0 w-full bg-white/95 glass-effect border-t border-outline-variant/10 px-6 py-5 z-50">
+<div class="max-w-2xl mx-auto flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold uppercase text-outline tracking-wider">Total Recommended</span>
+<span class="text-xl font-extrabold text-on-surface">$870.00</span>
+</div>
+<button class="bg-on-surface text-white font-bold py-3 px-8 rounded-lg shadow-xl hover:bg-slate-800 active:scale-95 transition-all flex items-center gap-2">
+                Approve All Repairs
+                <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</footer>
+</body></html>

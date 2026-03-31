@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#f8f9ff",
+            "secondary-fixed-dim": "#e0b6ff",
+            "on-tertiary-fixed-variant": "#005321",
+            "on-error-container": "#93000a",
+            "on-background": "#0b1c30",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#0d35bb",
+            "background": "#f8f9ff",
+            "tertiary": "#006d2e",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed": "#2e004e",
+            "error": "#ba1a1a",
+            "tertiary-container": "#00893c",
+            "primary-container": "#4f6bed",
+            "outline": "#757686",
+            "on-tertiary-container": "#ffffff",
+            "on-secondary-container": "#4c007d",
+            "tertiary-fixed": "#6bff8f",
+            "on-primary-container": "#ffffff",
+            "surface-variant": "#d3e4fe",
+            "on-surface-variant": "#444654",
+            "primary-fixed": "#dee1ff",
+            "on-primary-fixed": "#001258",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-surface": "#0b1c30",
+            "outline-variant": "#c5c5d7",
+            "inverse-on-surface": "#eaf1ff",
+            "on-tertiary-fixed": "#002109",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b9c3ff",
+            "surface-container-highest": "#d3e4fe",
+            "primary-fixed-dim": "#b9c3ff",
+            "primary": "#3250d3",
+            "surface-bright": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#eff4ff",
+            "secondary-container": "#c276ff",
+            "secondary": "#8337be",
+            "tertiary-fixed-dim": "#4ae176",
+            "secondary-fixed": "#f2daff",
+            "surface-tint": "#3351d3",
+            "surface-container": "#e5eeff",
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#6915a5",
+            "surface-dim": "#cbdbf5",
+            "inverse-surface": "#213145"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface overflow-hidden">
+<!-- TopAppBar Execution from JSON -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-300">GarageOS</span>
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-medium" placeholder="Search vehicle or RO..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<div class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:scale-95 duration-200 rounded-lg">
+<span class="material-symbols-outlined text-slate-500">notifications</span>
+</div>
+<div class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:scale-95 duration-200 rounded-lg">
+<span class="material-symbols-outlined text-slate-500">settings</span>
+</div>
+</div>
+<img class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-container/20" data-alt="professional male shop manager headshot with friendly expression in office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiIKxk38nre1bnYbFD33K6UUOd9onaKqLyNg_eymqyYZhUyFQjGbuA7cbskgbop_XMeRbC45D39uuyE5iB8W6Bopos8SmNK9XGVxh8iUD3rT5dXZ1XilE6vjCAjz6YqZ4RtME7XeUTzlutZGcU1BMP5ehe60qo06B3NVm7MFhpYpbqlzsZtb4RhHx9YLQIM_kyC_O5Myf6wI56mKCishmGqNf-E13SxHGLMOnUwJ4xLNWInicaqTdMf6eXYw_YVpCUK4igsib0IuB7"/>
+</div>
+</header>
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar Execution from JSON -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col py-4 z-40">
+<div class="px-6 mb-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold text-xs">M</div>
+<div class="hidden md:block">
+<p class="text-xs font-bold text-on-surface leading-none">Main Shop</p>
+<p class="text-[10px] text-on-surface-variant font-medium">Bay 1-4 Active</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">dashboard</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">directions_car</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Vehicles</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 border-r-4 border-blue-600 group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">description</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Work Orders</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">handyman</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Estimates</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">inventory_2</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Inventory</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">analytics</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Reports</span>
+</div>
+</nav>
+<div class="mt-auto px-3 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">help_outline</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Support</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">logout</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas (Background for Sidebar) -->
+<main class="flex-1 ml-20 md:ml-64 bg-surface p-6 flex flex-col gap-6 overflow-y-auto">
+<div class="flex items-center justify-between mb-4">
+<nav class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span>Work Orders</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="font-semibold text-on-surface">RO #4829 - 2022 BMW X5</span>
+</nav>
+<div class="flex gap-2">
+<button class="bg-surface-container-lowest text-primary px-4 py-2 rounded-lg font-semibold text-sm border-none shadow-sm">Save Draft</button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2 rounded-lg font-bold text-sm shadow-sm transition-transform active:scale-95">Complete Order</button>
+</div>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-12 gap-6 h-full">
+<!-- Center Panel (Placeholder) -->
+<div class="col-span-8 flex flex-col gap-6">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h1 class="text-2xl font-bold tracking-tight">Inspection Report</h1>
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold tracking-wide">AVAILABLE</span>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="h-64 bg-surface-container-low rounded-lg flex items-center justify-center border-2 border-dashed border-outline-variant/30">
+<p class="text-on-surface-variant font-medium">Primary Work Canvas</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar (The Task Focus) -->
+<aside class="col-span-4 bg-surface-container-lowest rounded-xl shadow-[0px_20px_40px_rgba(11,28,48,0.06)] flex flex-col border-none overflow-hidden h-[calc(100vh-160px)]">
+<!-- Sidebar Tabs -->
+<div class="flex border-b border-surface-container-low">
+<button class="flex-1 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Order</button>
+<button class="flex-1 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Customer</button>
+<button class="flex-1 py-4 text-xs font-bold uppercase tracking-widest text-primary border-b-2 border-primary">Vehicle</button>
+</div>
+<!-- Scrollable Sidebar Content -->
+<div class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-6">
+<!-- Vehicle Header Info -->
+<div class="flex items-center gap-4 bg-surface-container-low p-4 rounded-xl">
+<div class="bg-white p-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl">directions_car</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface text-lg leading-tight">2022 BMW X5</h3>
+<p class="text-xs font-semibold text-on-surface-variant tracking-wider uppercase">xDrive40i • Black Sapphire</p>
+</div>
+</div>
+<!-- General Info Section -->
+<section>
+<div class="flex items-center justify-between mb-3 cursor-pointer group">
+<h4 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">General Info</h4>
+<span class="material-symbols-outlined text-sm text-outline group-hover:text-primary">expand_less</span>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4">
+<div>
+<label class="block text-[10px] font-bold text-outline-variant uppercase tracking-tighter">Sub Model</label>
+<p class="text-sm font-medium text-on-surface">M Sport</p>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-outline-variant uppercase tracking-tighter">Color</label>
+<p class="text-sm font-medium text-on-surface">Jet Black</p>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-outline-variant uppercase tracking-tighter">Body Style</label>
+<p class="text-sm font-medium text-on-surface">SUV / SAV</p>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-outline-variant uppercase tracking-tighter">Engine</label>
+<p class="text-sm font-medium text-on-surface">3.0L I6 Turbo</p>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-outline-variant uppercase tracking-tighter">Fuel</label>
+<p class="text-sm font-medium text-on-surface">Gasoline (Premium)</p>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-outline-variant uppercase tracking-tighter">Transmission</label>
+<p class="text-sm font-medium text-on-surface">8-Spd Automatic</p>
+</div>
+<div class="col-span-2">
+<label class="block text-[10px] font-bold text-outline-variant uppercase tracking-tighter">Drivetrain</label>
+<p class="text-sm font-medium text-on-surface">AWD (xDrive)</p>
+</div>
+</div>
+</section>
+<!-- Mileage & PSI Section -->
+<section class="bg-surface-container-low p-4 rounded-xl space-y-4">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white p-3 rounded-lg shadow-sm">
+<label class="block text-[10px] font-bold text-primary uppercase tracking-tighter mb-1">Mileage In</label>
+<p class="text-base font-bold text-on-surface tracking-tight">42,510</p>
+</div>
+<div class="bg-white/50 p-3 rounded-lg border border-dashed border-outline-variant">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter mb-1">Mileage Out</label>
+<p class="text-base font-bold text-outline tracking-tight">--</p>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">Tire Pressure (PSI)</label>
+<div class="grid grid-cols-4 gap-2">
+<div class="bg-white text-center py-2 rounded-lg shadow-sm">
+<p class="text-[9px] font-bold text-outline-variant">FL</p>
+<p class="text-sm font-bold text-primary">35</p>
+</div>
+<div class="bg-white text-center py-2 rounded-lg shadow-sm">
+<p class="text-[9px] font-bold text-outline-variant">FR</p>
+<p class="text-sm font-bold text-primary">35</p>
+</div>
+<div class="bg-white text-center py-2 rounded-lg shadow-sm">
+<p class="text-[9px] font-bold text-outline-variant">RL</p>
+<p class="text-sm font-bold text-primary">38</p>
+</div>
+<div class="bg-white text-center py-2 rounded-lg shadow-sm">
+<p class="text-[9px] font-bold text-outline-variant">RR</p>
+<p class="text-sm font-bold text-primary">38</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Reference Section -->
+<section>
+<div class="flex items-center justify-between mb-3 cursor-pointer group">
+<h4 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Quick Reference</h4>
+<span class="material-symbols-outlined text-sm text-outline">expand_less</span>
+</div>
+<!-- Icon Button Grid -->
+<div class="grid grid-cols-3 gap-2 mb-4">
+<button class="flex flex-col items-center justify-center p-3 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-xl mb-1 group-hover:scale-110 duration-200">water_drop</span>
+<span class="text-[9px] font-bold uppercase tracking-tight">Fluids</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-xl mb-1 group-hover:scale-110 duration-200">filter_alt</span>
+<span class="text-[9px] font-bold uppercase tracking-tight">Filters</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-xl mb-1 group-hover:scale-110 duration-200">tire_repair</span>
+<span class="text-[9px] font-bold uppercase tracking-tight">Wheels</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-lg bg-primary text-white shadow-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl mb-1" style="font-variation-settings: 'FILL' 1;">battery_charging_full</span>
+<span class="text-[9px] font-bold uppercase tracking-tight">Batteries</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-xl mb-1 group-hover:scale-110 duration-200">sweep</span>
+<span class="text-[9px] font-bold uppercase tracking-tight">Wipers</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-xl mb-1 group-hover:scale-110 duration-200">info</span>
+<span class="text-[9px] font-bold uppercase tracking-tight">Indicator</span>
+</button>
+</div>
+<!-- Battery Data Table -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<div class="px-4 py-2 bg-on-surface/5 border-b border-surface-container-high">
+<p class="text-[10px] font-bold text-on-surface tracking-widest uppercase">Vehicle Battery</p>
+</div>
+<div class="p-3 space-y-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-primary">OEM #BAGM 94RH7800</span>
+<span class="text-[9px] text-on-surface-variant uppercase font-medium">Primary Starter</span>
+</div>
+<span class="text-xs font-bold text-on-surface">800 CCA</span>
+</div>
+<div class="h-px bg-outline-variant/20"></div>
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-on-surface">OEM #BAGM 48H6760</span>
+<span class="text-[9px] text-on-surface-variant uppercase font-medium">Standard Fit</span>
+</div>
+<span class="text-xs font-bold text-on-surface">760 CCA</span>
+</div>
+<div class="h-px bg-outline-variant/20"></div>
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-on-surface">OEM #BHAG MAUX-B</span>
+<span class="text-[9px] text-on-surface-variant uppercase font-medium">Auxiliary Battery</span>
+</div>
+<span class="text-xs font-bold text-on-surface">90 CCA</span>
+</div>
+<div class="h-px bg-outline-variant/20"></div>
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-secondary">Mighty #48AGM</span>
+<span class="text-[9px] text-on-surface-variant uppercase font-medium">Recommended Aftermarket</span>
+</div>
+<span class="text-xs font-bold text-on-surface">820 CCA</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Service History Section -->
+<section class="pb-6">
+<div class="flex items-center justify-between mb-4 cursor-pointer group">
+<h4 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Service History</h4>
+<span class="material-symbols-outlined text-sm text-outline">expand_less</span>
+</div>
+<div class="space-y-4 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container-high">
+<!-- History Item 1 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] font-bold text-primary uppercase">Oct 12, 2023</span>
+<span class="text-[10px] text-on-surface-variant font-medium">RO #4210</span>
+</div>
+<p class="text-sm font-bold text-on-surface">Synthetic Oil Change</p>
+<p class="text-[11px] text-on-surface-variant">Mileage: 38,201 mi • Tech: Dave R.</p>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] font-bold text-on-surface uppercase">May 24, 2023</span>
+<span class="text-[10px] text-on-surface-variant font-medium">RO #3892</span>
+</div>
+<p class="text-sm font-bold text-on-surface">Brake Fluid Flush &amp; Pads</p>
+<p class="text-[11px] text-on-surface-variant">Mileage: 32,550 mi • Tech: Marcus L.</p>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] font-bold text-on-surface uppercase">Jan 10, 2023</span>
+<span class="text-[10px] text-on-surface-variant font-medium">RO #3104</span>
+</div>
+<p class="text-sm font-bold text-on-surface">Tire Rotation &amp; Balance</p>
+<p class="text-[11px] text-on-surface-variant">Mileage: 28,100 mi • Tech: Dave R.</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border-2 border-dashed border-outline-variant/40 rounded-lg text-xs font-bold text-on-surface-variant hover:bg-surface-container-low transition-colors uppercase tracking-widest">
+                View Full Records
+              </button>
+</section>
+</div>
+<!-- Sidebar Footer Actions -->
+<div class="p-4 bg-surface-container-low border-t border-surface-container-high flex gap-2">
+<button class="flex-1 py-2 px-3 bg-surface-container-lowest text-on-surface text-[10px] font-bold uppercase tracking-wider rounded-lg shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">print</span>
+              Label
+            </button>
+<button class="flex-1 py-2 px-3 bg-primary text-white text-[10px] font-bold uppercase tracking-wider rounded-lg shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit</span>
+              Edit
+            </button>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body></html>

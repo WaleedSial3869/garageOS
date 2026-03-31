@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GarageOS - Workflow Kanban</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed": "#dee1ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-surface": "#0b1c30",
+                        "outline-variant": "#c5c5d7",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "tertiary": "#006d2e",
+                        "primary": "#3250d3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001258",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#ffffff",
+                        "background": "#f8f9ff",
+                        "secondary-container": "#c276ff",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-dim": "#cbdbf5",
+                        "secondary": "#8337be",
+                        "secondary-fixed-dim": "#e0b6ff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed": "#f2daff",
+                        "on-secondary-container": "#4c007d",
+                        "tertiary-container": "#00893c",
+                        "inverse-surface": "#213145",
+                        "on-primary-fixed-variant": "#0d35bb",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#4f6bed",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#6915a5",
+                        "surface-tint": "#3351d3",
+                        "on-secondary-fixed": "#2e004e",
+                        "on-tertiary-fixed": "#002109",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "on-surface-variant": "#444654",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#b9c3ff",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "on-background": "#0b1c30",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline": "#757686",
+                        "inverse-primary": "#b9c3ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .kanban-column { min-width: 320px; width: 320px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="fixed left-0 top-0 z-40 flex flex-col pt-16 h-screen w-16 hover:w-60 transition-all duration-300 ease-in-out overflow-hidden border-r border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl group">
+<nav class="flex-1 px-3 space-y-1 mt-4">
+<!-- Mapping Active State: Workflow -->
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Dashboard</span>
+</a>
+<!-- ACTIVE: Workflow -->
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-r-4 border-blue-600" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Workflow</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Calendar</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Time Clock</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Customers</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Team</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Parts/Inventory</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Reporting</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Marketing</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Messages</span>
+</a>
+<a class="flex items-center p-2 rounded-lg transition-all duration-300 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="ml-4 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-sm font-medium">Settings</span>
+</a>
+</nav>
+</aside>
+<div class="flex-1 flex flex-col min-w-0 ml-16">
+<!-- TopNavBar (Execution from JSON) -->
+<header class="w-full sticky top-0 z-50 flex justify-between items-center px-6 h-16 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm font-['Inter'] antialiased tracking-tight">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-600 dark:text-blue-400">GarageOS</span>
+<div class="h-6 w-px bg-slate-200 mx-2"></div>
+<div class="hidden md:flex gap-6">
+<span class="text-slate-500 dark:text-slate-400 cursor-pointer active:scale-95 duration-200 hover:text-blue-600">Dashboard</span>
+<span class="text-blue-700 dark:text-blue-300 font-semibold cursor-pointer active:scale-95 duration-200">Workflow</span>
+<span class="text-slate-500 dark:text-slate-400 cursor-pointer active:scale-95 duration-200 hover:text-blue-600">Inventory</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:block text-sm text-slate-600 font-medium">Good afternoon, Alex!</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="flex items-center gap-2 p-1 pr-3 hover:bg-slate-100 rounded-full transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined text-slate-500" data-icon="account_circle">account_circle</span>
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-700">Profile</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden bg-background">
+<!-- Header Section -->
+<section class="px-8 pt-8 pb-4">
+<div class="flex items-end justify-between mb-6">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-on-surface font-headline mb-4">Workflow</h1>
+<nav class="flex gap-8">
+<button class="pb-3 border-b-2 border-primary text-primary font-semibold text-sm transition-all">Columns</button>
+<button class="pb-3 border-b-2 border-transparent text-on-surface-variant hover:text-primary font-medium text-sm transition-all">List</button>
+<button class="pb-3 border-b-2 border-transparent text-on-surface-variant hover:text-primary font-medium text-sm transition-all">Parts &amp; Tires</button>
+</nav>
+</div>
+<div class="flex items-center gap-3 mb-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-highest border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary transition-all" placeholder="Search orders..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant/30 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                            Filters
+                        </button>
+<button class="flex items-center gap-2 px-5 py-2 bg-gradient-to-br from-primary to-primary-container text-white rounded-lg text-sm font-bold shadow-md hover:shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                            New Estimate
+                        </button>
+</div>
+</div>
+</section>
+<!-- Kanban Board -->
+<div class="flex-1 overflow-x-auto px-8 pb-8 flex gap-6 items-start">
+<!-- Column: Estimates -->
+<div class="kanban-column flex flex-col h-full bg-surface-container-low/50 rounded-xl p-3">
+<div class="flex items-center justify-between px-2 py-3 mb-2">
+<h3 class="font-bold text-sm uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+                            Estimates <span class="bg-surface-container text-[10px] px-2 py-0.5 rounded-full">3</span>
+</h3>
+<button class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="more_horiz">more_horiz</button>
+</div>
+<div class="space-y-4 overflow-y-auto pr-1">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group cursor-grab active:cursor-grabbing border border-transparent hover:border-primary/10">
+<div class="flex gap-4 mb-4">
+<img class="w-16 h-16 rounded-lg object-cover" data-alt="side view of a white modern sedan parked in a clean professional auto shop bay with soft overhead lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPvrYBCdmJCwRC7E6iEEibtp8A8sCjTWRPYByCBvhR506vfFILIvkjeNQvrCHg30Khldym1zn_vvNFARCbaV1lJ6jxOks6i1hTYWJzAB1Xy4t6lgbt6hgiCVrqImRf9TuzNMJ_Xo2gpYWmLgII0jBZBh2tIJBoNt1mkMMZVOh8Y4dGMiHWRjnZr_bv9pq7464jbws4BpuygiTBS264AQtwJbNaJR5p5dmmWKfgZJENJzy7ulPi0LzNl7X_-7uDnn--EFLtKgq1-kJr"/>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-extrabold text-on-surface-variant tracking-tighter">EST-1027</span>
+<span class="text-sm font-bold text-primary">$235.80</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight">4 Wheel Alignment</h4>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-[10px] font-bold px-2 py-1 rounded-full bg-amber-100 text-amber-800 uppercase tracking-wide">Waiting on Approval</span>
+<span class="text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-100 text-emerald-800 uppercase tracking-wide">New Client</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-sm" data-icon="directions_car">directions_car</span>
+<span class="font-medium">2020 Toyota Tacoma</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">AM</div>
+<span class="text-[11px] font-semibold text-on-surface-variant">Alex Murphy</span>
+</div>
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/4"></div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow group border border-transparent">
+<div class="flex gap-4 mb-4">
+<img class="w-16 h-16 rounded-lg object-cover" data-alt="close up of a luxury suv front grille and headlight in a high-end garage workshop environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1jtenqUB0rVo_di_E6fdGX3cB-1J-vh3KRke6o3cDCjF-CmhScg4brMPJzIckZjqIyHn1ij50ibnZsWULlfoWOtrBRaQzhCmCTb3jp0wAnGmJ0yOMYvbyZ-scoxdzUJipDjSlQ0aCCAsBo-LmRNu4l003HMmGIGuP4f1SGgIfhS4nSVB4ZEp_PJQFtiNcPwpvHmizbS3ngc3gvnJSz4UPMOkFewsL1Q-QVYFH4dI36-HkppNeft_CFYslIy6edt7wI4fuZU7LzXSJ"/>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-extrabold text-on-surface-variant tracking-tighter">EST-1028</span>
+<span class="text-sm font-bold text-primary">$1,142.00</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight">Brake Rotor Replacement</h4>
+</div>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-sm" data-icon="directions_car">directions_car</span>
+<span class="font-medium">2018 BMW X5</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="headshot of a professional mechanic in a blue uniform smiling confidently" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMEhewgV8a5eEbd4cjRyKzDaaqJOrHSHVgYEu0zQyuY-b6VSTy0LKxjHiiouATmSxNjj48L69aJywtt0kFGqsyY_VTLzidrd875IMZcmEgC_kTitqVCCmQEtlnGVnauElhuEK3ITPAKTo3NgT76CO_f3G4oMUg2GOxtadFyjWib0FQ3sPB-N-3sBZ6RRSv0vTUiN7FLIyeso8-ekRNJucDkfFqvKzFoigFCNPObaJnGeDS2Nn3IJZMCVo2c00xoDScdzd8D9ri8jpe"/>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant">Chris P.</span>
+</div>
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-0"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Approved Work -->
+<div class="kanban-column flex flex-col h-full bg-surface-container-low/50 rounded-xl p-3">
+<div class="flex items-center justify-between px-2 py-3 mb-2">
+<h3 class="font-bold text-sm uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+                            Approved Work <span class="bg-surface-container text-[10px] px-2 py-0.5 rounded-full">1</span>
+</h3>
+<button class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="more_horiz">more_horiz</button>
+</div>
+<div class="space-y-4 overflow-y-auto pr-1">
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border border-transparent">
+<div class="flex gap-4 mb-4">
+<img class="w-16 h-16 rounded-lg object-cover" data-alt="black classic muscle car on a lift in a workshop being serviced by tools in soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHmoGGZg8zKVCqeMbWs1JNKsjrdif2UEse-GiDNlF82PMEEomXSd6tPg0Kz9iXdeyK-GbFiJgb96yQDqcO9TZRF5zL8hhU6KUGscMt8rxUq6IhGdi9-up3TDSj5lOmdhPTQByWq_XMf7O9m2b27Tms3kArA8wlhs6ujtsQZg9V75kENbdhOwLkDgFq1_zvlrUt3iwQLe9JSHXx5k5VKGbK0IMCHwFVcrCTr-p0t1sAozX_nTyFWap9857UXxHoSIMQIje49QXVpjX7"/>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-extrabold text-on-surface-variant tracking-tighter">EST-1025</span>
+<span class="text-sm font-bold text-primary">$450.00</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight">Transmission Flush</h4>
+</div>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-sm" data-icon="directions_car">directions_car</span>
+<span class="font-medium">2015 Ford Mustang</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-fixed flex items-center justify-center text-[10px] font-bold text-on-secondary-container">JD</div>
+<span class="text-[11px] font-semibold text-on-surface-variant">John Doe</span>
+</div>
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/3"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: In Progress -->
+<div class="kanban-column flex flex-col h-full bg-surface-container-low/50 rounded-xl p-3">
+<div class="flex items-center justify-between px-2 py-3 mb-2">
+<h3 class="font-bold text-sm uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+                            In Progress <span class="bg-surface-container text-[10px] px-2 py-0.5 rounded-full">2</span>
+</h3>
+<button class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="more_horiz">more_horiz</button>
+</div>
+<div class="space-y-4 overflow-y-auto pr-1">
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border-l-4 border-l-primary">
+<div class="flex gap-4 mb-4">
+<div class="relative">
+<img class="w-16 h-16 rounded-lg object-cover" data-alt="red pickup truck parked in a well-lit service bay with various technical diagnostic equipment visible" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo5268lYtAevF6TXizzeocULf8E4ZNaPZxQfVMUUmcgNngiinzMnihxxoOGS59C8qOWYayMsqkk5fxO7B4wCriVsXb1fWRIHklyM8jT9449pA2EaUF1P_q09Y6QJKlHgKaLtlX1U7DQcgZ7t0fqiQsh5H1p0abCSUdjtj8-hvPRBgY4yft9BG_KGVYWHPYou6iXPSTGmos6PLH5_6BwMmKyDZTk0wN17LdXWzC3seI7ZW_FU6DRB6yncYacwvp5gG01_v__H38AGgu"/>
+<span class="absolute -bottom-1 -right-1 bg-primary text-white text-[8px] p-0.5 rounded-full material-symbols-outlined" data-icon="sync" style="font-size: 10px;">sync</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-extrabold text-on-surface-variant tracking-tighter">EST-1020</span>
+<span class="text-sm font-bold text-primary">$89.95</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight">Synthetic Oil Change</h4>
+</div>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="directions_car">directions_car</span>
+<span class="font-medium">2022 Rivian R1T</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Progress</span>
+<span class="text-[10px] font-bold text-primary">75%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="mechanic in workshop uniform looking at camera with friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2SW1MhuZXXLwcZm2-BSN_pOyh9w7yFLt_GMqb2Q5AtMMa9yNwk_aa80dzPzfBUuhpAgmF9qtB1j_ZbSkFHC6LfbH62QOrR_TAHhh8jtgU1E1xvPGBoxghJtjdUFLDBFUwj2jacsBvEDp-CT4jVJQcjERhBS9T4S3IbTSd0sf9La7hL1p5duo-Np8yd7UZ3wMJjqgK8IhCwbjWv640Y4uAZR87CSkZ7Ya7hf0FkAphC9em9ZcWo7s3rDDvkoindG-wA_38I05H0lGl"/>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant">Mike S.</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border-l-4 border-l-primary">
+<div class="flex gap-4 mb-4">
+<img class="w-16 h-16 rounded-lg object-cover" data-alt="front view of a silver crossover vehicle inside a clean garage facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlAIXhaNVOhem5d6XwY2gY0ggotpzVI1ZmTj6cTFeymdppEIU9as_s2ezCWrDgRpEIwoWsNhFQj3P9IXYFnMyn0LXMsM0PAsluy45i44-3laUmpzTu7QHp92_TeqA3PQxr1nDkANc4TfHpJBVrZx4XBDrOKX_vt563F1Uv7nCkUYqP3V9DMhyVrR5w817NILR4cvYof1PqONgJzI5mQ7SbQLJWTX0ECXSFFRnUWltKJyJF1DQnE7DGNJg_ERGEoUfFDFwGbNKiwxHK"/>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-extrabold text-on-surface-variant tracking-tighter">EST-1019</span>
+<span class="text-sm font-bold text-primary">$342.15</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight">Tire Rotation &amp; Balance</h4>
+</div>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="directions_car">directions_car</span>
+<span class="font-medium">2019 Honda CR-V</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[40%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Invoices -->
+<div class="kanban-column flex flex-col h-full bg-surface-container-low/50 rounded-xl p-3">
+<div class="flex items-center justify-between px-2 py-3 mb-2">
+<h3 class="font-bold text-sm uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+                            Invoices <span class="bg-surface-container text-[10px] px-2 py-0.5 rounded-full">2</span>
+</h3>
+<button class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="more_horiz">more_horiz</button>
+</div>
+<div class="space-y-4 overflow-y-auto pr-1">
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border border-transparent opacity-75 grayscale hover:grayscale-0 transition-all">
+<div class="flex gap-4 mb-4">
+<img class="w-16 h-16 rounded-lg object-cover" data-alt="electric car being plugged in at a modern charging station in a bright facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjU2dLwccLCwGRbEXsPrpPwjnTrgeRDO9hfBc3EFE5tvMPKl_54Tvuu8R9Xc2S_hK6Nzyuc4OywcpZVGzjj6qjSl_EPxjWG68qgpQoyMRu0ZZ03d0Y2_D-l69zZITsGdM0KTSooYgGp2FrDVDkIqyuwy4RVXEzEHzIGi18jHINAkP0oO0In_MtcPCiqIR1qxW7QgAAwkUei3JE7KlpncMgkr31ILiVSq1XHA1Ucpt8LCzF5RANoLDReAyXTt3te2zh3zIFLjdJ9D5l"/>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-extrabold text-on-surface-variant tracking-tighter">EST-1015</span>
+<span class="text-sm font-bold text-primary">$150.00</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight">Electrical Diagnostic</h4>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-[10px] font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-800 uppercase tracking-wide">Paid</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-sm" data-icon="directions_car">directions_car</span>
+<span class="font-medium">2021 Tesla Model 3</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold text-on-tertiary-fixed">SR</div>
+<span class="text-[11px] font-semibold text-on-surface-variant">Sarah Riley</span>
+</div>
+<span class="material-symbols-outlined text-emerald-600 text-lg" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GarageOS - Create Purchase Order</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-container": "#00893c",
+                        "secondary-fixed": "#f2daff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#3351d3",
+                        "secondary-container": "#c276ff",
+                        "tertiary": "#006d2e",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed": "#002109",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-container-high": "#dce9ff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary-container": "#4f6bed",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-fixed": "#2e004e",
+                        "on-surface": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001258",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary-container": "#4c007d",
+                        "primary-fixed-dim": "#b9c3ff",
+                        "primary": "#3250d3",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#0d35bb",
+                        "on-background": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b9c3ff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "secondary-fixed-dim": "#e0b6ff",
+                        "secondary": "#8337be",
+                        "on-secondary-fixed-variant": "#6915a5",
+                        "surface-dim": "#cbdbf5",
+                        "outline": "#757686",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c5c5d7",
+                        "on-surface-variant": "#444654",
+                        "on-primary-fixed": "#dee1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #3250d3 0%, #4f6bed 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100 flex justify-between items-center h-16 px-6 shadow-sm">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-blue-700">GarageOS</span>
+<div class="hidden md:flex gap-6 items-center">
+<div class="text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer px-3 py-1 rounded text-sm font-medium">Dashboard</div>
+<div class="text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer px-3 py-1 rounded text-sm font-medium">Vehicles</div>
+<div class="text-blue-600 font-semibold text-sm font-medium">Inventory</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg border-b-2 border-primary-container">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Quick search..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-50 rounded-full" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer p-2 hover:bg-slate-50 rounded-full" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-200">
+<img alt="Shop Manager Profile" data-alt="professional portrait of a shop manager in a clean automotive uniform with workshop background blurred" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY-nDJSOWgB1p7Ut8a_LPA9YsE8qrmu4k0b6VKdlE3e2Pft5h36LHfLcp0QfQMThAwzSCce0XAd7PG_B-P5mWSyh2r0BeRvJ-b2DanNt2g0b36R5C0zbMIjKjCgdqJW5b8LdB42vjideAvcFRIUqcsRO5VoR038EZ6kQzO3dXsSr2Dn0Rplq6sRmzFNe8J5TnfXtWwV5tumcMlwgNZk3eGCxFXJwQefO6jF5hE6Qcii_I5k8ya9Xv9TubeEigiqVwRQeBJbizhuLN8"/>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen overflow-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 bg-slate-50 border-r border-slate-100 flex flex-col py-4">
+<nav class="flex-1 space-y-1 px-3">
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block group-hover:translate-x-1 duration-300">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block group-hover:translate-x-1 duration-300">Vehicles</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg bg-blue-50 text-blue-700 border-r-4 border-blue-600 transition-all cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block group-hover:translate-x-1 duration-300">Inventory</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block group-hover:translate-x-1 duration-300">Estimates</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block group-hover:translate-x-1 duration-300">Work Orders</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block group-hover:translate-x-1 duration-300">Reports</span>
+</div>
+</nav>
+<div class="px-3 border-t border-slate-100 pt-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-20 md:ml-64 flex-1 overflow-y-auto no-scrollbar bg-surface p-6 md:p-8">
+<!-- Breadcrumbs and Header -->
+<div class="mb-8">
+<nav class="flex text-on-surface-variant text-sm mb-4 gap-2 font-medium">
+<span>Inventory</span>
+<span class="material-symbols-outlined text-xs leading-none self-center" data-icon="chevron_right">chevron_right</span>
+<span>Purchase Orders</span>
+<span class="material-symbols-outlined text-xs leading-none self-center" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface">PO-0045</span>
+</nav>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<h1 class="text-3xl font-bold tracking-tight text-on-surface">PO-0045</h1>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-xs font-bold uppercase rounded-full tracking-wider border border-outline-variant/15">Draft</span>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-on-primary-fixed-variant text-sm font-semibold hover:bg-surface-container-low rounded-lg transition-colors">
+                            Print
+                        </button>
+<button class="px-4 py-2 bg-surface-container-low text-on-surface text-sm font-semibold rounded-lg transition-colors">
+                            Save as Draft
+                        </button>
+<button class="signature-gradient px-6 py-2 text-on-primary text-sm font-bold rounded-lg shadow-sm active:scale-95 transition-all">
+                            Send to Vendor
+                        </button>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout for PO Details -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Vendor Selection Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/10 shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<h2 class="text-sm font-bold uppercase tracking-widest text-primary">Vendor Details</h2>
+<button class="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-tighter">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span> Change Vendor
+                        </button>
+</div>
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 bg-surface-container-low rounded-lg flex items-center justify-center border border-outline-variant/15">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="factory">factory</span>
+</div>
+<div class="flex-1">
+<h3 class="text-xl font-bold text-on-surface mb-1">NAPA Auto Parts</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                                1422 Industrial Way, Central Valley, CA
+                            </p>
+<p class="text-on-surface-variant text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
+                                orders@napa-central.com
+                            </p>
+</div>
+<div class="text-right hidden md:block">
+<span class="text-xs font-bold uppercase text-on-surface-variant block mb-1">Vendor ID</span>
+<span class="text-sm font-mono text-on-surface">VND-4491-X</span>
+</div>
+</div>
+</div>
+<!-- Order Parameters Card -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10">
+<h2 class="text-sm font-bold uppercase tracking-widest text-primary mb-6">Order Details</h2>
+<div class="space-y-4">
+<div class="relative">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1 block">PO Date</label>
+<div class="bg-surface-container-highest p-2 rounded flex items-center border-b border-outline-variant/15">
+<span class="material-symbols-outlined text-sm mr-2 text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-medium w-full" type="text" value="Oct 24, 2023"/>
+</div>
+</div>
+<div class="relative">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1 block">Expected Delivery</label>
+<div class="bg-surface-container-highest p-2 rounded flex items-center border-b border-outline-variant/15">
+<span class="material-symbols-outlined text-sm mr-2 text-on-surface-variant" data-icon="local_shipping">local_shipping</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-medium w-full" type="text" value="Oct 27, 2023"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Line Items Table Section -->
+<div class="lg:col-span-3 bg-surface-container-lowest rounded-xl border border-outline-variant/10 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-50 flex justify-between items-center">
+<h2 class="text-sm font-bold uppercase tracking-widest text-on-surface">Line Items</h2>
+<button class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span> Add Line Item
+                        </button>
+</div>
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Part Name / #</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Description</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-center">Qty</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Unit Cost</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Total</th>
+<th class="w-10"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="font-bold text-on-surface">Brake Pads - Premium</div>
+<div class="text-xs font-mono text-on-surface-variant">BP-99212-S</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm text-on-surface-variant">Ceramic front brake pads for 2018-2022 SUVs</div>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="bg-surface-container text-on-surface px-3 py-1 rounded-full text-sm font-bold">12</span>
+</td>
+<td class="px-6 py-5 text-right font-medium">$45.00</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">$540.00</td>
+<td class="px-4 py-5 text-center">
+<span class="material-symbols-outlined text-slate-300 hover:text-error transition-colors cursor-pointer text-sm" data-icon="delete">delete</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="font-bold text-on-surface">Oil Filter XL</div>
+<div class="text-xs font-mono text-on-surface-variant">FLT-OIL-400</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm text-on-surface-variant">High-capacity synthetic oil filter</div>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="bg-surface-container text-on-surface px-3 py-1 rounded-full text-sm font-bold">24</span>
+</td>
+<td class="px-6 py-5 text-right font-medium">$8.25</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">$198.00</td>
+<td class="px-4 py-5 text-center">
+<span class="material-symbols-outlined text-slate-300 hover:text-error transition-colors cursor-pointer text-sm" data-icon="delete">delete</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Notes and Totals Section -->
+<div class="lg:col-span-2 bg-surface-container-low rounded-xl p-6 border border-outline-variant/10">
+<h2 class="text-sm font-bold uppercase tracking-widest text-primary mb-4">Internal Notes</h2>
+<textarea class="w-full h-32 bg-surface-container-lowest rounded-lg border-none focus:ring-2 focus:ring-primary-container p-4 text-sm resize-none" placeholder="Add any delivery instructions or special requirements here..."></textarea>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/10 shadow-sm">
+<h2 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-6 text-center">Order Summary</h2>
+<div class="space-y-4">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="font-bold">$738.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Shipping (Standard)</span>
+<span class="font-bold">$12.50</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Estimated Tax (8.25%)</span>
+<span class="font-bold">$61.91</span>
+</div>
+<div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+<span class="text-sm font-bold uppercase tracking-widest text-primary">Total Amount</span>
+<span class="text-2xl font-black text-on-surface">$812.41</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Spacing -->
+<div class="h-12"></div>
+</main>
+</div>
+<!-- Floating Action Button for Mobile -->
+<div class="md:hidden fixed bottom-6 right-6">
+<button class="signature-gradient w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</body></html>

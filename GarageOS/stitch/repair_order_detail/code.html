@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#dee1ff",
+              "surface-container-highest": "#d3e4fe",
+              "on-surface": "#0b1c30",
+              "outline-variant": "#c5c5d7",
+              "on-primary": "#ffffff",
+              "surface-variant": "#d3e4fe",
+              "tertiary": "#006d2e",
+              "primary": "#3250d3",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed": "#001258",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#ffffff",
+              "background": "#f8f9ff",
+              "secondary-container": "#c276ff",
+              "tertiary-fixed": "#6bff8f",
+              "surface-dim": "#cbdbf5",
+              "secondary": "#8337be",
+              "secondary-fixed-dim": "#e0b6ff",
+              "surface-bright": "#f8f9ff",
+              "surface-container-low": "#eff4ff",
+              "secondary-fixed": "#f2daff",
+              "on-secondary-container": "#4c007d",
+              "tertiary-container": "#00893c",
+              "inverse-surface": "#213145",
+              "on-primary-fixed-variant": "#0d35bb",
+              "on-tertiary": "#ffffff",
+              "primary-container": "#4f6bed",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed-variant": "#6915a5",
+              "surface-tint": "#3351d3",
+              "on-secondary-fixed": "#2e004e",
+              "on-tertiary-fixed": "#002109",
+              "inverse-on-surface": "#eaf1ff",
+              "on-tertiary-fixed-variant": "#005321",
+              "tertiary-fixed-dim": "#4ae176",
+              "on-surface-variant": "#444654",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b9c3ff",
+              "surface-container": "#e5eeff",
+              "surface": "#f8f9ff",
+              "on-background": "#0b1c30",
+              "surface-container-high": "#dce9ff",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#ffffff",
+              "error": "#ba1a1a",
+              "outline": "#757686",
+              "inverse-primary": "#b9c3ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; color: #0b1c30; }
+        .glass-nav { backdrop-filter: blur(12px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar (Shared Component Strategy) -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md text-blue-600 dark:text-blue-400 font-['Inter'] antialiased tracking-tight w-full sticky top-0 z-50 shadow-sm flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer active:scale-95 duration-200 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">arrow_back</span>
+<div class="flex flex-col">
+<span class="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Repair Orders / RO #1002</span>
+<h1 class="text-lg font-bold tracking-tight text-on-surface">#1002: Premium Oil Change &amp; Safety Inspection</h1>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-on-surface-variant hover:bg-slate-100 transition-colors rounded-lg">
+<span class="material-symbols-outlined text-lg">print</span> Print
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-on-surface-variant hover:bg-slate-100 transition-colors rounded-lg">
+<span class="material-symbols-outlined text-lg">send</span> Send
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-on-surface-variant hover:bg-slate-100 transition-colors rounded-lg">
+<span class="material-symbols-outlined text-lg">chat</span> Message
+            </button>
+<div class="h-6 w-[1px] bg-outline-variant/30 mx-2"></div>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">notifications</span>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-xs font-bold">A</div>
+</div>
+</nav>
+<!-- Side Navigation (Shared Component Strategy) -->
+<aside class="bg-white dark:bg-slate-900 h-screen w-16 hover:w-60 transition-all duration-300 ease-in-out overflow-hidden border-r border-slate-100 dark:border-slate-800 fixed left-0 top-0 z-40 flex flex-col pt-16 group">
+<div class="flex flex-col gap-1 mt-4">
+<!-- Active Tab: Workflow -->
+<div class="flex items-center h-12 px-4 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-r-4 border-blue-600 cursor-pointer">
+<span class="material-symbols-outlined min-w-[32px]">settings_input_component</span>
+<span class="ml-4 font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Workflow</span>
+</div>
+<div class="flex items-center h-12 px-4 text-slate-500 hover:bg-slate-50 cursor-pointer transition-colors">
+<span class="material-symbols-outlined min-w-[32px]">dashboard</span>
+<span class="ml-4 font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Dashboard</span>
+</div>
+<div class="flex items-center h-12 px-4 text-slate-500 hover:bg-slate-50 cursor-pointer transition-colors">
+<span class="material-symbols-outlined min-w-[32px]">calendar_today</span>
+<span class="ml-4 font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Calendar</span>
+</div>
+<div class="flex items-center h-12 px-4 text-slate-500 hover:bg-slate-50 cursor-pointer transition-colors">
+<span class="material-symbols-outlined min-w-[32px]">person</span>
+<span class="ml-4 font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Customers</span>
+</div>
+<div class="flex items-center h-12 px-4 text-slate-500 hover:bg-slate-50 cursor-pointer transition-colors">
+<span class="material-symbols-outlined min-w-[32px]">inventory_2</span>
+<span class="ml-4 font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Parts/Inventory</span>
+</div>
+</div>
+</aside>
+<main class="ml-16 min-h-screen pb-24">
+<!-- Browser-style Browser Tab -->
+<div class="bg-surface-container-low px-6 pt-2 flex gap-1 border-b border-outline-variant/10">
+<div class="bg-white rounded-t-lg px-4 py-2 flex items-center gap-2 text-sm font-semibold shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
+<span class="material-symbols-outlined text-primary text-sm">build</span>
+                RO #1002 - Premium Oil Change
+                <span class="material-symbols-outlined text-xs text-slate-400 hover:text-error cursor-pointer">close</span>
+</div>
+<div class="px-4 py-2 flex items-center gap-2 text-sm font-medium text-slate-500 hover:bg-surface-container transition-colors rounded-t-lg cursor-pointer">
+<span class="material-symbols-outlined text-sm">person</span>
+                Customer Profile
+            </div>
+</div>
+<!-- Banner Content -->
+<div class="px-8 py-6 flex flex-wrap gap-8 items-start bg-white shadow-sm">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="professional portrait of a middle-aged man with short dark hair in a casual business shirt with friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpUTuVySzKKzhubiHSZLIo8NG9zMgGGc-DW8b1GGlBxVdkLLKcsh6P_NN-e63qxyQjuMA_yYISH80-Qi4ND3DYw0r8k2KHYHRD8rpsNKRurO8i7S_FT9Yi6wIsjoq7YEEL7LpIk9K8KHO4q8QHMbHTgA96Qx91dIki_NLJkpWXw58ASTsNTpefSrab8Pi7skBnMTh1BO6aDtQdVywXSNWN7IrjuPI98Qdmb0pELf53oYW-OTcYWuHojux4H94Lheutmgq92ck25uxp"/>
+<div>
+<h2 class="font-bold text-on-surface leading-tight">Alex Rivera</h2>
+<p class="text-sm text-on-surface-variant">arivera.auto@gmail.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4 border-l border-outline-variant/20 pl-8">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">directions_car</span>
+</div>
+<div>
+<h2 class="font-bold text-on-surface leading-tight">2021 BMW M3 Competition</h2>
+<p class="text-sm font-mono text-on-surface-variant tracking-wider">VIN: WBS53AY00MFLXXXXX</p>
+</div>
+</div>
+<div class="ml-auto flex items-center gap-2">
+<span class="px-3 py-1 bg-tertiary-container/10 text-tertiary text-xs font-bold rounded-full uppercase tracking-widest border border-tertiary-container/20">Approved Work</span>
+</div>
+</div>
+<!-- Sub-Tabs Navigation -->
+<div class="px-8 bg-white flex gap-8 border-t border-outline-variant/5">
+<button class="py-4 text-sm font-bold text-primary border-b-2 border-primary">Services</button>
+<button class="py-4 text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors">Summary</button>
+<button class="py-4 text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors">Inspections</button>
+<button class="py-4 text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors">Time Clocks</button>
+<button class="py-4 text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors">Parts &amp; Tires</button>
+</div>
+<div class="p-8 grid grid-cols-12 gap-8">
+<!-- Left Column: Services & Actions -->
+<div class="col-span-9 space-y-6">
+<!-- Collapsible Recommendations -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+<span class="font-bold text-on-surface">Comments &amp; Recommendations</span>
+</div>
+<span class="material-symbols-outlined transition-transform group-hover:translate-y-0.5">expand_more</span>
+</button>
+<div class="p-6 pt-0 grid grid-cols-2 gap-6">
+<div class="bg-white p-4 rounded-lg shadow-sm">
+<span class="text-[10px] font-bold uppercase text-slate-400 mb-2 block tracking-widest">Customer Request</span>
+<p class="text-sm text-on-surface italic">"Synthetic oil change and check brake pads, I noticed a slight squeak when coming to a stop."</p>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-secondary">
+<span class="text-[10px] font-bold uppercase text-secondary mb-2 block tracking-widest">Tech Recommendation (AI)</span>
+<p class="text-sm text-on-surface">Recommend brake fluid flush based on moisture content and scheduled maintenance interval for 40k miles.</p>
+</div>
+</div>
+</div>
+<!-- Search & Quick Actions -->
+<div class="flex items-center gap-4">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-11 pr-4 py-3 bg-white border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Search All Services..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-3 bg-surface-container-highest text-primary font-bold text-sm rounded-xl hover:bg-primary hover:text-white transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">star</span> Suggested
+                        </button>
+<button class="px-4 py-3 bg-white border border-outline-variant/20 text-on-surface font-bold text-sm rounded-xl hover:bg-slate-50 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add</span> Labor
+                        </button>
+<button class="px-4 py-3 bg-white border border-outline-variant/20 text-on-surface font-bold text-sm rounded-xl hover:bg-slate-50 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">inventory</span> Part
+                        </button>
+<button class="px-4 py-3 bg-primary text-white font-bold text-sm rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add_circle</span> New Service
+                        </button>
+</div>
+</div>
+<!-- Service Section: Premium Oil Change -->
+<div class="bg-white rounded-2xl shadow-sm overflow-hidden ring-1 ring-outline-variant/10">
+<div class="p-6 bg-slate-50 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">oil_barrel</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface tracking-tight">Premium Oil Change</h3>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Authorized</span>
+<div class="w-12 h-6 bg-tertiary-container rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-on-surface transition-colors">more_vert</span>
+</div>
+</div>
+<!-- Labor Subsection -->
+<div class="p-6 border-b border-slate-50">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-slate-400 text-lg">engineering</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-500">Labor</h4>
+</div>
+<table class="w-full text-left">
+<thead>
+<tr class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+<th class="pb-3 pl-2">Technician</th>
+<th class="pb-3">Status</th>
+<th class="pb-3 text-right">Hours</th>
+<th class="pb-3 text-right">Rate</th>
+<th class="pb-3 text-right">Discount</th>
+<th class="pb-3 text-right pr-2">Subtotal</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium">
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="py-4 pl-2">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-primary">JT</div>
+                                            James Taylor
+                                        </div>
+</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-[10px] font-bold rounded-full uppercase">Incomplete</span>
+</td>
+<td class="py-4 text-right">0.40</td>
+<td class="py-4 text-right">$165.00</td>
+<td class="py-4 text-right text-slate-400">--</td>
+<td class="py-4 text-right pr-2 font-bold">$66.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Part Subsection -->
+<div class="p-6">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-slate-400 text-lg">tools_wrench</span>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-500">Parts</h4>
+</div>
+<table class="w-full text-left">
+<thead>
+<tr class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+<th class="pb-3 pl-2">Part Description</th>
+<th class="pb-3">Part #</th>
+<th class="pb-3">Tags</th>
+<th class="pb-3 text-right">Qty</th>
+<th class="pb-3 text-right">Price</th>
+<th class="pb-3 text-right pr-2">Subtotal</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="py-4 pl-2">
+<div class="flex flex-col">
+<span>Full Synthetic Oil (5W-30)</span>
+<span class="text-xs text-slate-400 font-normal">Premium European Blend</span>
+</div>
+</td>
+<td class="py-4 font-mono text-xs">SYN-5W30-EUR</td>
+<td class="py-4">
+<div class="flex gap-1">
+<span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[9px] font-bold rounded uppercase">Not Reserved</span>
+<span class="px-2 py-0.5 bg-tertiary-container/20 text-tertiary text-[9px] font-bold rounded uppercase">Green Bin</span>
+</div>
+</td>
+<td class="py-4 text-right">6.00</td>
+<td class="py-4 text-right">$13.60</td>
+<td class="py-4 text-right pr-2 font-bold">$81.60</td>
+</tr>
+</tbody>
+</table>
+<div class="mt-4 pt-4 border-t border-slate-50 flex justify-end">
+<div class="text-right">
+<p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Service Subtotal</p>
+<p class="text-xl font-black text-on-surface">$147.60</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar -->
+<div class="col-span-3 space-y-6">
+<div class="bg-white rounded-2xl shadow-sm p-2 flex gap-1 ring-1 ring-outline-variant/10">
+<button class="flex-1 py-2 text-xs font-bold text-primary bg-primary-container/10 rounded-lg">Order</button>
+<button class="flex-1 py-2 text-xs font-bold text-on-surface-variant hover:bg-slate-50 transition-colors rounded-lg">Customer</button>
+<button class="flex-1 py-2 text-xs font-bold text-on-surface-variant hover:bg-slate-50 transition-colors rounded-lg">Vehicle</button>
+</div>
+<div class="bg-white rounded-2xl shadow-sm p-6 space-y-6 ring-1 ring-outline-variant/10">
+<div>
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Service Writer</h4>
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full" data-alt="headshot of a professional service advisor with dark hair and blue shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDBgeKY4E_HX_A4SCKdkpJzy3yFEZL_FvXZsQzEyvKZpsq3h_SZaY3QkhdRnnLWtYjk8_rYczbAoNwR9GLO2EvF14Z-vopl1c7AtpyaX4Io8h1aSTtmvZ0R8tUyovMPIWDPonzlJpyEqvTrgX7PJjTYjb9CFe1f1py-WxxxA1EOTs2ZJ_uS6NwWFzSp5q3Kuw8fG3_BW5gx6vlgcf0oxiWqVG97xPIOCfJQYhTnds3UY1VXHLej8fE-TQCmNg9b84SFnJ2SNQGd-2r"/>
+<span class="text-sm font-semibold">David Hoffman</span>
+</div>
+</div>
+<div>
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Assigned Techs</h4>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-primary z-10">JT</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-600 z-0">+1</div>
+</div>
+</div>
+<div>
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Workflow Status</h4>
+<div class="relative pt-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold py-1 px-2 rounded-full text-tertiary bg-tertiary-container/10">Approved Work</span>
+<span class="text-[10px] font-bold text-on-surface-variant">75% Done</span>
+</div>
+<div class="overflow-hidden h-1.5 mb-4 text-xs flex rounded bg-surface-container">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary" style="width:75%"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-white border border-primary text-primary font-bold text-sm rounded-xl hover:bg-primary/5 transition-colors">
+                        Convert to Invoice
+                    </button>
+</div>
+<!-- Ad/Insights Card -->
+<div class="bg-gradient-to-br from-primary to-primary-container rounded-2xl p-6 text-white shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined text-3xl mb-4">insights</span>
+<h4 class="font-bold leading-tight mb-2">Increase Shop Efficiency</h4>
+<p class="text-xs text-white/80 leading-relaxed mb-4">You have 3 similar vehicles scheduled for oil changes today. Batch part ordering suggested.</p>
+<button class="text-xs font-bold underline underline-offset-4">View Parts List</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Sticky Bar -->
+<footer class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-outline-variant/10 px-8 py-4 flex items-center justify-between z-50">
+<div class="flex items-center gap-8">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Selected Services</span>
+<span class="font-bold">1 Items</span>
+</div>
+<div class="h-8 w-[1px] bg-slate-100"></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Grand Total</span>
+<span class="text-2xl font-black text-on-surface">$147.80</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-surface-container-highest text-primary font-bold text-sm rounded-xl hover:bg-primary/5 transition-all">
+                Save Draft
+            </button>
+<button class="px-8 py-3 bg-primary text-white font-bold text-sm rounded-xl shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">payments</span> New Payment
+            </button>
+</div>
+</footer>
+</body></html>

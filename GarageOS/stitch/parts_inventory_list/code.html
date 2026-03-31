@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Management | GarageOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-container": "#00893c",
+                        "secondary-fixed": "#f2daff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#3351d3",
+                        "secondary-container": "#c276ff",
+                        "tertiary": "#006d2e",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed": "#002109",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-container-high": "#dce9ff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary-container": "#4f6bed",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-fixed": "#2e004e",
+                        "on-surface": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001258",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary-container": "#4c007d",
+                        "primary-fixed-dim": "#b9c3ff",
+                        "primary": "#3250d3",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#0d35bb",
+                        "on-background": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b9c3ff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "secondary-fixed-dim": "#e0b6ff",
+                        "secondary": "#8337be",
+                        "on-secondary-fixed-variant": "#6915a5",
+                        "surface-dim": "#cbdbf5",
+                        "outline": "#757686",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c5c5d7",
+                        "on-surface-variant": "#444654",
+                        "on-primary-container": "#ffffff",
+                        "primary-fixed": "#dee1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #3250d3 0%, #4f6bed 100%);
+        }
+        .ghost-border-bottom {
+            border-bottom: 1px solid rgba(197, 197, 215, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-blue-700">GarageOS</span>
+<div class="hidden md:flex items-center gap-2 bg-surface-container rounded-lg px-3 py-1.5 group transition-all focus-within:ring-2 focus-within:ring-primary/20">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 placeholder:text-outline font-medium" placeholder="Quick Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors rounded-lg cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors rounded-lg cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden cursor-pointer active:scale-95 duration-200">
+<img alt="Shop Manager Profile" class="w-full h-full object-cover" data-alt="professional portrait of a male automotive shop manager wearing a clean uniform in a bright office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUxTUw3PNX5FiXBvAGpouVB_jDtAWa4qEwYlmRhyw_ha76g5TSeQk81iAe4L-lyAKzYi6C33a5xPGN6GEvoWwLpHHUz4JRRJeqVxvay-U6IBAK1-BpMBuw0OCASCv7XVecGqdn192iVpZkVw4uV6_n94jJOoY-0hj4fsl-WcdmPsaMmDMoTG1EuS_CxY2xWKhngaX3mEjjxAOmfE1zx6fkSXjl9TQwM48Ci2FVeGjjmVMS8XrmAobEeXrSfboX7x7BooaeCTdvOTpC"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 border-r border-slate-100 bg-slate-50 flex flex-col py-4 z-40">
+<div class="px-4 mb-6 hidden md:block">
+<h2 class="text-xs font-semibold uppercase tracking-widest text-blue-600">Main Shop</h2>
+<p class="text-[10px] text-slate-500 font-medium">Bay 1-4 Active</p>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="dashboard">dashboard</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="directions_car">directions_car</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Vehicles</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="description">description</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Estimates</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="handyman">handyman</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Work Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-700 border-r-4 border-blue-600 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="analytics">analytics</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Reports</span>
+</a>
+</nav>
+<div class="px-2 space-y-1 mt-auto border-t border-slate-100 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="help_outline">help_outline</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300" data-icon="logout">logout</span>
+<span class="hidden md:block text-xs font-semibold uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 md:ml-64 pt-24 pb-12 px-8 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-bold tracking-tight text-on-surface mb-1">Inventory</h1>
+<p class="text-on-surface-variant font-medium text-sm">Manage parts, supplies, and stock levels across all bays.</p>
+</div>
+<button class="bg-gradient-primary text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-semibold text-sm shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                Add Part
+            </button>
+</div>
+<!-- Quick Stats Row: Bento Grid Style -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm hover:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 text-blue-600 rounded-lg group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined" data-icon="inventory">inventory</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Inventory Status</span>
+</div>
+<div class="text-2xl font-bold text-on-surface">4,281</div>
+<div class="text-xs font-semibold text-slate-500 uppercase mt-1">Total Parts</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm hover:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-purple-50 text-purple-600 rounded-lg group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Capital</span>
+</div>
+<div class="text-2xl font-bold text-on-surface">$142,502</div>
+<div class="text-xs font-semibold text-slate-500 uppercase mt-1">Total Value</div>
+</div>
+<div class="bg-error-container p-6 rounded-xl border border-transparent shadow-sm hover:opacity-95 transition-opacity group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-white/50 text-error rounded-lg">
+<span class="material-symbols-outlined" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-error-container/60">Urgent</span>
+</div>
+<div class="text-2xl font-bold text-on-error-container">12</div>
+<div class="text-xs font-semibold text-on-error-container/80 uppercase mt-1">Low Stock Alerts</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm hover:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-emerald-50 text-tertiary rounded-lg group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Incoming</span>
+</div>
+<div class="text-2xl font-bold text-on-surface">28</div>
+<div class="text-xs font-semibold text-slate-500 uppercase mt-1">Pending Orders</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface-container-lowest rounded-xl mb-6 p-4 flex flex-wrap gap-4 items-center shadow-sm">
+<div class="flex-1 min-w-[300px] bg-surface-container-low rounded-lg flex items-center px-4 py-2 border-b border-transparent focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-outline mr-2 text-xl" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-medium" placeholder="Filter by name, part #, or vendor..." type="text"/>
+</div>
+<div class="flex gap-2">
+<select class="bg-surface-container-low border-none rounded-lg text-sm font-semibold text-on-surface-variant focus:ring-primary py-2 pl-4 pr-10">
+<option>All Categories</option>
+<option>Engine Parts</option>
+<option>Braking System</option>
+<option>Tires &amp; Wheels</option>
+<option>Fluids &amp; Oils</option>
+<option>Electrical</option>
+</select>
+<select class="bg-surface-container-low border-none rounded-lg text-sm font-semibold text-on-surface-variant focus:ring-primary py-2 pl-4 pr-10">
+<option>All Locations</option>
+<option>Warehouse A</option>
+<option>Bay 1 Storage</option>
+<option>Counter Stock</option>
+</select>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-lg flex items-center gap-2 font-semibold text-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                    More Filters
+                </button>
+</div>
+</div>
+<!-- Inventory Table Section -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-transparent">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Part name</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Part #</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Category</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Vendor</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Location</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">In Stock</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">Min</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Cost</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Sell</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Margin</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tags</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<!-- Row 1: Normal Stock -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+</div>
+<span class="font-bold text-sm text-on-surface">Oil Filter - Premium Synth</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">OF-9921-X</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase">Fluids &amp; Oils</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">PartsSource Pro</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">A1-R4-B2</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm font-bold text-tertiary">42</span>
+</td>
+<td class="px-6 py-4 text-center text-sm font-medium text-slate-400">10</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">$8.50</td>
+<td class="px-6 py-4 text-sm font-bold text-on-surface">$18.99</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold text-tertiary-container">55.2%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-blue-400"></span>
+<span class="w-2 h-2 rounded-full bg-slate-200"></span>
+</div>
+</td>
+</tr>
+<!-- Row 2: Low Stock Alert -->
+<tr class="bg-error-container/20 hover:bg-error-container/30 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="brake_circ">stop_circle</span>
+</div>
+<span class="font-bold text-sm text-on-surface">Ceramic Brake Pads (Front)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">BP-CER-440</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase">Braking System</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">Global Auto</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">B3-R1-S2</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="text-sm font-extrabold text-error">2</span>
+<span class="material-symbols-outlined text-error text-[16px]" data-icon="arrow_downward">arrow_downward</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center text-sm font-medium text-slate-400">5</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">$32.10</td>
+<td class="px-6 py-4 text-sm font-bold text-on-surface">$84.50</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold text-tertiary-container">62.0%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+</td>
+</tr>
+<!-- Row 3: Out of Stock -->
+<tr class="bg-error-container/10 hover:bg-error-container/20 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-200 flex items-center justify-center text-slate-400 grayscale">
+<span class="material-symbols-outlined" data-icon="battery_full">battery_full</span>
+</div>
+<span class="font-bold text-sm text-on-surface">AGM Battery - Group 35</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">BAT-AGM-35</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase">Electrical</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">EnergyPlus Co</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">D2-Floor</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm font-extrabold text-error">0</span>
+</td>
+<td class="px-6 py-4 text-center text-sm font-medium text-slate-400">2</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">$145.00</td>
+<td class="px-6 py-4 text-sm font-bold text-on-surface">$229.00</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold text-tertiary-container">36.7%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-slate-300"></span>
+</div>
+</td>
+</tr>
+<!-- Row 4: Normal Stock -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="settings_ethernet">settings_ethernet</span>
+</div>
+<span class="font-bold text-sm text-on-surface">Timing Belt Kit - H Series</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">TBK-H20-09</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase">Engine Parts</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">PartsSource Pro</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">A2-R1-C1</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm font-bold text-tertiary">8</span>
+</td>
+<td class="px-6 py-4 text-center text-sm font-medium text-slate-400">3</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">$64.20</td>
+<td class="px-6 py-4 text-sm font-bold text-on-surface">$120.00</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold text-tertiary-container">46.5%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+</td>
+</tr>
+<!-- Row 5: Normal Stock -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="propane_tank">propane_tank</span>
+</div>
+<span class="font-bold text-sm text-on-surface">5W-30 Synthetic Oil (1qt)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">OIL-5W30-QT</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase">Fluids &amp; Oils</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">Castrol Direct</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-500">Bulk Tank 1</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm font-bold text-tertiary">144</span>
+</td>
+<td class="px-6 py-4 text-center text-sm font-medium text-slate-400">48</td>
+<td class="px-6 py-4 text-sm font-medium text-on-surface-variant">$4.25</td>
+<td class="px-6 py-4 text-sm font-bold text-on-surface">$9.95</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold text-tertiary-container">57.3%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="px-6 py-4 bg-surface-container-low/30 border-t border-slate-50 flex justify-between items-center">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Showing 1-10 of 4,281 parts</p>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center bg-white text-slate-500 border border-slate-100 shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-primary text-white shadow-sm font-bold text-xs">1</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-white text-slate-500 border border-slate-100 shadow-sm hover:bg-slate-50 transition-all font-bold text-xs">2</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-white text-slate-500 border border-slate-100 shadow-sm hover:bg-slate-50 transition-all font-bold text-xs">3</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-white text-slate-500 border border-slate-100 shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Quick Action (Mobile Only logic handled via shell visibility if needed) -->
+<!-- Suppressed as per context rules for main dashboard focus -->
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-xl flex justify-around items-center h-16 px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Dash</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Vehicles</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-600 font-semibold">
+<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Stock</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Work</span>
+</button>
+</nav>
+</body></html>

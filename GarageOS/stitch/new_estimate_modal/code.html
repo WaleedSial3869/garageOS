@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GarageOS - New Estimate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container": "#e5eeff",
+              "inverse-on-surface": "#eaf1ff",
+              "tertiary-fixed-dim": "#4ae176",
+              "on-secondary": "#ffffff",
+              "error": "#ba1a1a",
+              "primary-container": "#4f6bed",
+              "surface-dim": "#cbdbf5",
+              "error-container": "#ffdad6",
+              "secondary-container": "#c276ff",
+              "inverse-primary": "#b9c3ff",
+              "on-tertiary-fixed": "#002109",
+              "inverse-surface": "#213145",
+              "secondary-fixed": "#f2daff",
+              "on-tertiary": "#ffffff",
+              "surface-container-low": "#eff4ff",
+              "on-secondary-fixed": "#2e004e",
+              "on-primary-fixed-variant": "#0d35bb",
+              "on-surface": "#0b1c30",
+              "tertiary-fixed": "#6bff8f",
+              "secondary-fixed-dim": "#e0b6ff",
+              "primary-fixed-dim": "#b9c3ff",
+              "on-secondary-container": "#4c007d",
+              "surface-container-high": "#dce9ff",
+              "on-error": "#ffffff",
+              "on-primary-fixed": "#001258",
+              "surface-variant": "#d3e4fe",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#444654",
+              "on-primary": "#ffffff",
+              "on-primary-container": "#ffffff",
+              "secondary": "#8337be",
+              "background": "#f8f9ff",
+              "surface-container-highest": "#d3e4fe",
+              "on-tertiary-fixed-variant": "#005321",
+              "on-error-container": "#93000a",
+              "tertiary": "#006d2e",
+              "surface": "#f8f9ff",
+              "primary-fixed": "#dee1ff",
+              "on-tertiary-container": "#ffffff",
+              "surface-bright": "#f8f9ff",
+              "outline": "#757686",
+              "on-background": "#0b1c30",
+              "primary": "#3250d3",
+              "tertiary-container": "#00893c",
+              "surface-tint": "#3351d3",
+              "on-secondary-fixed-variant": "#6915a5",
+              "outline-variant": "#c5c5d7"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-300">GarageOS</span>
+<div class="hidden md:flex gap-6 ml-8">
+<span class="text-slate-500 dark:text-slate-400 font-medium text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Dashboard</span>
+<span class="text-blue-600 dark:text-blue-400 font-semibold text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Estimates</span>
+<span class="text-slate-500 dark:text-slate-400 font-medium text-sm cursor-pointer hover:bg-slate-50 transition-colors px-3 py-2 rounded-lg">Inventory</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">notifications</span>
+</div>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">settings</span>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container ml-2">
+<img alt="Shop Manager Profile" data-alt="Professional shop manager portrait in a clean office setting, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBREkVhXVVYQ3W0eoONvujoC4X3USi90HDM0QnCZAtcDili0umEQyqvmUsXODl_GJ5Mzb3qQNL0nBxNKBLMT3QKMHi-q0gDWEsMkxCybghLjWmjGhtsOiulpjnwpGhE3QNip8Gkh43w0imyjCeVZFhYNQU4QR7UBXpgUhC17pCcEkdKuMlEvvpokRfrZBZCBnhMHbBTFiJqaaPOcC5JkBJyxMTjJNh_VKawCje8PsOSXVCZzKfhulaUKrVM29RLTqTvBtp-iIkTPih3"/>
+</div>
+</div>
+</nav>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-on-surface/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<!-- New Estimate Modal -->
+<div class="bg-surface-container-lowest w-full max-w-[640px] rounded-xl shadow-[0px_20px_40px_rgba(11,28,48,0.06)] overflow-hidden">
+<!-- Header -->
+<div class="px-6 py-5 flex items-center justify-between">
+<h1 class="text-xl font-bold text-on-surface tracking-tight">New Estimate</h1>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Content -->
+<div class="px-6 pb-8 space-y-6 max-h-[768px] overflow-y-auto">
+<!-- Customer Search Section -->
+<section class="space-y-2">
+<label class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Customer Search</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-highest border-b border-outline-variant/30 focus:border-primary focus:bg-surface-bright focus:ring-0 transition-all rounded-t-lg" placeholder="Search by name, phone, or email..." type="text"/>
+<!-- Autocomplete Dropdown Preview -->
+<div class="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-lg border-t border-surface-container-low z-10 overflow-hidden">
+<div class="px-4 py-3 hover:bg-surface-container-low cursor-pointer flex justify-between items-center transition-colors">
+<div>
+<div class="font-semibold text-sm">Alexander Henderson</div>
+<div class="text-xs text-on-surface-variant">(555) 123-4567 • alex@example.com</div>
+</div>
+<span class="text-[10px] bg-tertiary-container text-white px-2 py-1 rounded-full font-bold">VIP</span>
+</div>
+</div>
+</div>
+</section>
+<!-- VIN Decoder Section -->
+<section class="bg-surface-container-low rounded-xl p-4 space-y-3">
+<div class="flex items-center justify-between">
+<label class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Quick VIN Decoder</label>
+<span class="text-[10px] text-primary font-bold">AUTO-POPULATE MODE</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 relative">
+<input class="w-full px-4 py-3 bg-surface-container-lowest border-b border-outline-variant focus:border-primary focus:ring-0 rounded-lg text-sm font-mono tracking-wider" placeholder="Enter 17-digit VIN" type="text" value="1HGCB1F1XJA"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold text-sm hover:opacity-90 active:scale-95 transition-all shadow-md">
+                            Decode
+                        </button>
+</div>
+</section>
+<!-- Vehicle Selection -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<label class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Vehicle Selection</label>
+<button class="text-primary text-xs font-bold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                            Add New Vehicle
+                        </button>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Active Selected Vehicle -->
+<div class="p-4 bg-primary-container border-2 border-primary rounded-xl cursor-pointer transition-all">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+<span class="text-[10px] text-on-primary/80 font-bold bg-white/20 px-2 py-0.5 rounded-full uppercase">Current</span>
+</div>
+<div class="mt-2 font-bold text-on-primary leading-tight">2020 BMW M3</div>
+<div class="text-[10px] text-on-primary/70 font-medium">B58 Engine • Blue Carbon</div>
+</div>
+<!-- Secondary Vehicle -->
+<div class="p-4 bg-surface-container-lowest border border-outline-variant/50 rounded-xl cursor-pointer hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">directions_car</span>
+<div class="mt-2 font-bold text-on-surface leading-tight">2018 Audi Q7</div>
+<div class="text-[10px] text-on-surface-variant font-medium">3.0T V6 • Grey Metallic</div>
+</div>
+</div>
+</section>
+<!-- Dropdowns and Multi-select -->
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Service Writer</label>
+<select class="w-full px-4 py-3 bg-surface-container-highest border-b border-outline-variant focus:border-primary focus:ring-0 rounded-lg text-sm appearance-none">
+<option>James Wilson (Default)</option>
+<option>Sarah Miller</option>
+<option>Mike Chen</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Tags</label>
+<div class="flex flex-wrap gap-1 p-2 bg-surface-container-highest border-b border-outline-variant rounded-lg min-h-[44px]">
+<span class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-bold">
+                                PRIORITY
+                                <span class="material-symbols-outlined text-[12px] cursor-pointer">close</span>
+</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-low text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-bold">
+                                FLEET
+                                <span class="material-symbols-outlined text-[12px] cursor-pointer">close</span>
+</span>
+<span class="material-symbols-outlined text-outline ml-auto">label</span>
+</div>
+</div>
+</div>
+<!-- Notes Section -->
+<section class="space-y-2">
+<label class="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Internal Notes</label>
+<textarea class="w-full px-4 py-3 bg-surface-container-highest border-b border-outline-variant focus:border-primary focus:ring-0 rounded-lg text-sm resize-none" placeholder="Add diagnosis details or customer specific requests..." rows="3"></textarea>
+</section>
+</div>
+<!-- Footer Action Bar -->
+<div class="px-6 py-5 bg-surface-container-low flex justify-end gap-3">
+<button class="px-6 py-2.5 border border-outline-variant text-on-surface-variant font-bold text-sm rounded-lg hover:bg-surface-container-highest transition-colors active:scale-95">
+                    Cancel
+                </button>
+<button class="px-8 py-2.5 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-sm rounded-lg shadow-lg hover:opacity-95 active:scale-95 transition-all">
+                    Create Estimate
+                </button>
+</div>
+</div>
+</div>
+</body></html>

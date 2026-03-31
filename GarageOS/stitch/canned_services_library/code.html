@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GarageOS - Canned Services Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#f8f9ff",
+              "secondary-fixed-dim": "#e0b6ff",
+              "on-tertiary-fixed-variant": "#005321",
+              "on-error-container": "#93000a",
+              "on-background": "#0b1c30",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#0d35bb",
+              "background": "#f8f9ff",
+              "tertiary": "#006d2e",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed": "#2e004e",
+              "error": "#ba1a1a",
+              "tertiary-container": "#00893c",
+              "primary-container": "#4f6bed",
+              "outline": "#757686",
+              "on-tertiary-container": "#ffffff",
+              "on-secondary-container": "#4c007d",
+              "tertiary-fixed": "#6bff8f",
+              "on-primary-container": "#ffffff",
+              "surface-variant": "#d3e4fe",
+              "on-surface-variant": "#444654",
+              "primary-fixed": "#dee1ff",
+              "on-primary-fixed": "#001258",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-surface": "#0b1c30",
+              "outline-variant": "#c5c5d7",
+              "inverse-on-surface": "#eaf1ff",
+              "on-tertiary-fixed": "#002109",
+              "on-error": "#ffffff",
+              "inverse-primary": "#b9c3ff",
+              "surface-container-highest": "#d3e4fe",
+              "primary-fixed-dim": "#b9c3ff",
+              "primary": "#3250d3",
+              "surface-bright": "#f8f9ff",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#eff4ff",
+              "secondary-container": "#c276ff",
+              "secondary": "#8337be",
+              "tertiary-fixed-dim": "#4ae176",
+              "secondary-fixed": "#f2daff",
+              "surface-tint": "#3351d3",
+              "surface-container": "#e5eeff",
+              "surface-container-high": "#dce9ff",
+              "on-secondary-fixed-variant": "#6915a5",
+              "surface-dim": "#cbdbf5",
+              "inverse-surface": "#213145"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- Top Navigation Bar (Shared Component Anchor) -->
+<nav class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-blue-700 dark:text-blue-300">GarageOS</span>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-50 transition-colors cursor-pointer px-3 py-1 rounded-md">Dashboard</span>
+<span class="text-blue-600 dark:text-blue-400 font-semibold text-sm cursor-pointer px-3 py-1 rounded-md">Vehicles</span>
+<span class="text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-50 transition-colors cursor-pointer px-3 py-1 rounded-md">Estimates</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-500 p-2 hover:bg-slate-50 rounded-full cursor-pointer">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-slate-500 p-2 hover:bg-slate-50 rounded-full cursor-pointer">settings</span>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white overflow-hidden">
+<img alt="Shop Manager Profile" class="w-full h-full object-cover" data-alt="professional portrait of a middle-aged male shop manager in a clean workshop environment, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwXqKPT0cnEe-y3rrbCJrgY7W2Tthnslfk_lVrnb6P_Wn0mFNO5ITRWjnnXjvkWnhEmgj2HEzcGjpbMH0HPpFQUQvoJ2J7BEmIYyc_WiRLKRVWJApzJ5EC_dSJRAt1VAvqBbw2GQZF2Q0FHqokeHOiQFYCTyBQTp_UIoZZnciJ0dIpHiabaJKPtgtFg-V_savxIYp4LWGuTl6h7bId-ALlmRGKmZYWZDGOBwxDawwAA-LEQBUhjaU5mhYfW5WgQm_ItzXWxwdLuWTY"/>
+</div>
+</div>
+</nav>
+<!-- Full Screen Overlay Container -->
+<main class="pt-16 min-h-screen bg-surface-container-low flex flex-col">
+<!-- Context Bar -->
+<div class="bg-white px-6 py-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<div>
+<h1 class="font-bold text-on-surface tracking-tight">2021 Ford F-150 Lariat</h1>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span>VIN: 1FTFW1E81MFA...</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-primary">info</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary hover:bg-primary-container text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    + Add New Canned Service
+                </button>
+<button class="p-2 text-on-surface-variant hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<!-- Tab Row -->
+<div class="bg-white px-6 border-b border-outline-variant/20">
+<div class="flex gap-8 overflow-x-auto no-scrollbar">
+<button class="py-4 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">All</button>
+<button class="py-4 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Service Guide</button>
+<button class="py-4 text-sm font-bold text-primary border-b-2 border-primary whitespace-nowrap">Canned</button>
+<button class="py-4 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Deferred</button>
+<button class="py-4 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Maintenance Schedule</button>
+<button class="py-4 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Recalls</button>
+<button class="py-4 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Codes</button>
+<button class="py-4 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Diagrams &amp; Procedures</button>
+</div>
+</div>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar: Categories -->
+<aside class="w-64 bg-white border-r border-outline-variant/20 flex flex-col">
+<div class="p-4 border-b border-outline-variant/10">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-sm focus:ring-1 focus:ring-primary focus:bg-white transition-all" placeholder="Search categories..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-2 custom-scrollbar">
+<nav class="space-y-0.5 px-2">
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container text-primary font-bold text-sm" href="#">
+<span class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">list</span>All</span>
+<span class="text-xs font-normal text-on-surface-variant bg-white px-1.5 py-0.5 rounded">124</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">architecture</span>Alignment
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">ac_unit</span>Heating &amp; Cooling
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">fact_check</span>Inspections
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">oil_barrel</span>Oil Services
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">celebration</span>Seasonal Specials
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">tire_repair</span>Tire Services
+                        </a>
+</nav>
+</div>
+<div class="p-4 border-t border-outline-variant/10">
+<button class="w-full py-2 border-2 border-dashed border-outline-variant text-on-surface-variant rounded-lg text-xs font-bold uppercase tracking-wider hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                        + New Category
+                    </button>
+</div>
+</aside>
+<!-- Main Content: Service List -->
+<section class="flex-1 overflow-hidden flex flex-col">
+<!-- Search & Filters -->
+<div class="p-4 bg-white/50 backdrop-blur-sm border-b border-outline-variant/10 flex items-center gap-4">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant/30 rounded-xl text-base shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Search canned services" type="text"/>
+</div>
+<button class="px-4 py-3 bg-white border border-outline-variant/30 rounded-xl text-on-surface-variant flex items-center gap-2 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+                        Filters
+                    </button>
+</div>
+<!-- Table Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar bg-white">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-lowest z-10">
+<tr class="text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant/60 border-b border-outline-variant/10">
+<th class="w-12 px-6 py-4"></th>
+<th class="px-4 py-4">Service Name &amp; Description</th>
+<th class="px-4 py-4 text-center">Parts</th>
+<th class="px-4 py-4 text-center">Labor</th>
+<th class="px-4 py-4 text-right">Price</th>
+<th class="px-4 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Service Row 1 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary cursor-pointer transition-colors">keyboard_arrow_down</span>
+</td>
+<td class="px-4 py-5">
+<div class="font-bold text-on-surface">4 Wheel Alignment</div>
+<div class="text-xs text-on-surface-variant/70 line-clamp-1">Complete computerized alignment check and adjust to factory specs.</div>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-xs font-semibold px-2 py-1 bg-surface-container rounded-full text-on-surface-variant">0 items</span>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-sm font-medium">1.5 hrs</span>
+</td>
+<td class="px-4 py-5 text-right">
+<span class="text-base font-bold text-on-surface">$149.95</span>
+</td>
+<td class="px-4 py-5">
+<div class="flex items-center justify-end gap-3">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-full text-xs font-bold transition-all active:scale-95">
+                                            + Add Service
+                                        </button>
+<span class="material-symbols-outlined text-on-surface-variant/40 hover:text-on-surface cursor-pointer">more_vert</span>
+</div>
+</td>
+</tr>
+<!-- Service Row 2 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary cursor-pointer transition-colors">keyboard_arrow_down</span>
+</td>
+<td class="px-4 py-5">
+<div class="font-bold text-on-surface">A/C Service (R134A)</div>
+<div class="text-xs text-on-surface-variant/70 line-clamp-1">Evacuate and recharge system with up to 1lb refrigerant. Includes dye test.</div>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-xs font-semibold px-2 py-1 bg-surface-container rounded-full text-on-surface-variant">2 items</span>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-sm font-medium">1.0 hrs</span>
+</td>
+<td class="px-4 py-5 text-right">
+<span class="text-base font-bold text-on-surface">$189.00</span>
+</td>
+<td class="px-4 py-5">
+<div class="flex items-center justify-end gap-3">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-full text-xs font-bold transition-all active:scale-95">
+                                            + Add Service
+                                        </button>
+<span class="material-symbols-outlined text-on-surface-variant/40 hover:text-on-surface cursor-pointer">more_vert</span>
+</div>
+</td>
+</tr>
+<!-- Service Row 3 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary cursor-pointer transition-colors">keyboard_arrow_down</span>
+</td>
+<td class="px-4 py-5">
+<div class="font-bold text-on-surface">Complimentary Multi-Point Inspection</div>
+<div class="text-xs text-on-surface-variant/70 line-clamp-1">Visual inspection of fluid levels, brakes, tires, and suspension components.</div>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-xs font-semibold px-2 py-1 bg-surface-container rounded-full text-on-surface-variant">0 items</span>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-sm font-medium">0.5 hrs</span>
+</td>
+<td class="px-4 py-5 text-right">
+<span class="text-base font-bold text-tertiary">FREE</span>
+</td>
+<td class="px-4 py-5">
+<div class="flex items-center justify-end gap-3">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-full text-xs font-bold transition-all active:scale-95">
+                                            + Add Service
+                                        </button>
+<span class="material-symbols-outlined text-on-surface-variant/40 hover:text-on-surface cursor-pointer">more_vert</span>
+</div>
+</td>
+</tr>
+<!-- Service Row 4 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary cursor-pointer transition-colors">keyboard_arrow_down</span>
+</td>
+<td class="px-4 py-5">
+<div class="font-bold text-on-surface">Pre-Purchase Inspection</div>
+<div class="text-xs text-on-surface-variant/70 line-clamp-1">Comprehensive 150-point inspection including test drive and diagnostics report.</div>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-xs font-semibold px-2 py-1 bg-surface-container rounded-full text-on-surface-variant">0 items</span>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-sm font-medium">2.0 hrs</span>
+</td>
+<td class="px-4 py-5 text-right">
+<span class="text-base font-bold text-on-surface">$225.00</span>
+</td>
+<td class="px-4 py-5">
+<div class="flex items-center justify-end gap-3">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-full text-xs font-bold transition-all active:scale-95">
+                                            + Add Service
+                                        </button>
+<span class="material-symbols-outlined text-on-surface-variant/40 hover:text-on-surface cursor-pointer">more_vert</span>
+</div>
+</td>
+</tr>
+<!-- Service Row 5 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary cursor-pointer transition-colors">keyboard_arrow_down</span>
+</td>
+<td class="px-4 py-5">
+<div class="font-bold text-on-surface">Premium Oil Change - Full Synthetic</div>
+<div class="text-xs text-on-surface-variant/70 line-clamp-1">Up to 6qts Full Synthetic oil, premium filter, and chassis lube.</div>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-xs font-semibold px-2 py-1 bg-surface-container rounded-full text-on-surface-variant">2 items</span>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-sm font-medium">0.6 hrs</span>
+</td>
+<td class="px-4 py-5 text-right">
+<span class="text-base font-bold text-on-surface">$89.95</span>
+</td>
+<td class="px-4 py-5">
+<div class="flex items-center justify-end gap-3">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-full text-xs font-bold transition-all active:scale-95">
+                                            + Add Service
+                                        </button>
+<span class="material-symbols-outlined text-on-surface-variant/40 hover:text-on-surface cursor-pointer">more_vert</span>
+</div>
+</td>
+</tr>
+<!-- Service Row 6 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary cursor-pointer transition-colors">keyboard_arrow_down</span>
+</td>
+<td class="px-4 py-5">
+<div class="font-bold text-on-surface">Tire Mount &amp; Balance (Full Set)</div>
+<div class="text-xs text-on-surface-variant/70 line-clamp-1">Mounting of 4 tires with computerized high-speed balancing.</div>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-xs font-semibold px-2 py-1 bg-surface-container rounded-full text-on-surface-variant">4 items</span>
+</td>
+<td class="px-4 py-5 text-center">
+<span class="text-sm font-medium">1.2 hrs</span>
+</td>
+<td class="px-4 py-5 text-right">
+<span class="text-base font-bold text-on-surface">$120.00</span>
+</td>
+<td class="px-4 py-5">
+<div class="flex items-center justify-end gap-3">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-full text-xs font-bold transition-all active:scale-95">
+                                            + Add Service
+                                        </button>
+<span class="material-symbols-outlined text-on-surface-variant/40 hover:text-on-surface cursor-pointer">more_vert</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Summary -->
+<div class="p-4 bg-white border-t border-outline-variant/10 flex items-center justify-between text-xs text-on-surface-variant">
+<div>Showing 6 of 124 Canned Services</div>
+<div class="flex items-center gap-2">
+<button class="p-1 rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<span class="font-bold text-primary px-2">1</span>
+<button class="p-1 rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Side Navigation Bar (Hidden on Mobile) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-20 md:w-64 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col py-4 hidden md:flex">
+<div class="px-4 mb-8">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-white shadow-sm border border-slate-100">
+<div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">garage</span>
+</div>
+<div class="hidden md:block">
+<div class="text-sm font-bold text-on-surface">Main Shop</div>
+<div class="text-[10px] font-semibold text-tertiary uppercase tracking-wider">Bay 1-4 Active</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">dashboard</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg bg-blue-50 text-blue-700 border-r-4 border-blue-600 transition-all cursor-pointer">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Vehicles</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">description</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Estimates</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">handyman</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Work Orders</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">inventory_2</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Inventory</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">analytics</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Reports</span>
+</div>
+</nav>
+<div class="mt-auto px-4 space-y-1 pt-4 border-t border-slate-100">
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Support</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-500 hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-xs font-semibold uppercase tracking-widest hidden md:block">Logout</span>
+</div>
+</div>
+</aside>
+</body></html>
