@@ -1,0 +1,25 @@
+-- ============================================================
+-- Seed Data — Default tags
+-- ============================================================
+-- Note: Shop and owner are created during registration.
+-- These tags are inserted once a shop exists.
+-- In production, this would be run as part of the registration flow.
+
+-- This is a template — replace SHOP_ID with the actual shop UUID after registration.
+-- For development, you can run this after creating your first shop.
+
+-- Example seed (uncomment and replace SHOP_ID):
+-- INSERT INTO tags (shop_id, name, color, entity_type) VALUES
+--   ('SHOP_ID', 'New Client', '#4f6bed', 'customer'),
+--   ('SHOP_ID', 'Bay 1', '#3250d3', 'order'),
+--   ('SHOP_ID', 'Bay 2', '#3250d3', 'order'),
+--   ('SHOP_ID', 'Bay 3', '#3250d3', 'order'),
+--   ('SHOP_ID', 'Call Back', '#8337be', 'customer'),
+--   ('SHOP_ID', 'Follow Up', '#8337be', 'customer'),
+--   ('SHOP_ID', 'Friends & Family', '#006d2e', 'customer'),
+--   ('SHOP_ID', 'Same Day Pick Up', '#00893c', 'order'),
+--   ('SHOP_ID', 'Waiting on Approval', '#ba1a1a', 'order'),
+--   ('SHOP_ID', 'VIP', '#8337be', 'customer'),
+--   ('SHOP_ID', 'Fleet', '#3250d3', 'customer'),
+--   ('SHOP_ID', 'Warranty', '#006d2e', 'order'),
+--   ('SHOP_ID', 'Insurance Claim', '#ba1a1a', 'order');
