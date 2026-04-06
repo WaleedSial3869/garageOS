@@ -49,3 +49,41 @@ export type WorkflowStatus = (typeof WORKFLOW_STATUSES)[number]
 export type TeamRole = (typeof TEAM_ROLES)[number]
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number]
 export type InspectionCondition = (typeof INSPECTION_CONDITIONS)[number]
+
+export const PREFERRED_CONTACT_METHODS = ["email", "sms", "phone"] as const
+export type PreferredContact = (typeof PREFERRED_CONTACT_METHODS)[number]
+
+export const REFERRAL_SOURCES = [
+  "walk_in",
+  "google",
+  "yelp",
+  "referral",
+  "social_media",
+  "other",
+] as const
+
+export const CA_PROVINCES = [
+  "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT",
+] as const
+
+export const VEHICLE_FUEL_TYPES = [
+  "Gasoline",
+  "Diesel",
+  "Electric",
+  "Hybrid",
+  "Plug-in Hybrid",
+  "Flex Fuel",
+] as const
+
+export const VEHICLE_TRANSMISSIONS = [
+  "Automatic",
+  "Manual",
+  "CVT",
+] as const
+
+export const VEHICLE_DRIVETRAINS = [
+  "FWD",
+  "RWD",
+  "AWD",
+  "4WD",
+] as const
