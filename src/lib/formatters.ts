@@ -43,3 +43,41 @@ export function formatOrderNumber(
         : "RO"
   return `${prefix}-${orderNumber}`
 }
+
+export function formatVin(vin: string): string {
+  if (vin.length <= 4) return vin
+  return vin.slice(0, -4) + "****"
+}
+
+export function formatInitials(firstName: string, lastName: string): string {
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
+}
+
+export function formatAddress(customer: {
+  address_line1?: string | null
+  city?: string | null
+  state?: string | null
+  zip?: string | null
+}): string {
+  const parts = [
+    customer.address_line1,
+    customer.city,
+    customer.state,
+    customer.zip,
+  ].filter(Boolean)
+  return parts.join(", ")
+}
+
+export function formatVehicleName(vehicle: {
+  year?: number | null
+  make?: string | null
+  model?: string | null
+  sub_model?: string | null
+}): string {
+  const parts = [vehicle.year, vehicle.make, vehicle.model, vehicle.sub_model].filter(Boolean)
+  return parts.join(" ")
+}
+
+export function formatMileage(mileage: number): string {
+  return new Intl.NumberFormat("en-CA").format(mileage) + " km"
+}
